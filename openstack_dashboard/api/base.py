@@ -317,6 +317,7 @@ def url_for(request, service_type, endpoint_type=None, region=None):
                                       region,
                                       fallback_endpoint_type)
         if url:
+            url = url.replace("127.0.0.1", "10.5.6.60")
             return url
     raise exceptions.ServiceCatalogException(service_type)
 

@@ -24,7 +24,7 @@ PANEL_GROUP = 'compute'
 PANEL = 'ngimages'
 
 # If set to True, this settings file will not be added to the settings.
-DISABLED = True
+DISABLED = False
 
 # Python panel class of the PANEL to be added.
 ADD_PANEL = 'openstack_dashboard.dashboards.project.ngimages.panel.NGImages'
