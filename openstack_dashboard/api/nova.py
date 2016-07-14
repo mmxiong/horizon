@@ -463,13 +463,14 @@ def get_auth_params_from_request(request):
         request.user.username,
         request.user.token.id,
         request.user.tenant_id,
-        base.url_for(request, 'compute')
+        base.url_for(request, 'compute'),
+        base.url_for(request, 'identity')
     )
 
 
 @memoized_with_request(get_auth_params_from_request)
 def novaclient(request_auth_params):
-    username, token_id, project_id, auth_url = request_auth_params
+    username, token_id, project_id, nova_url, auth_url = request_auth_params
     c = nova_client.Client(VERSIONS.get_active_version()['version'],
                            username,
                            token_id,
@@ -479,7 +480,7 @@ def novaclient(request_auth_params):
                            cacert=CACERT,
                            http_log_debug=settings.DEBUG)
     c.client.auth_token = token_id
-    c.client.management_url = auth_url
+    c.client.management_url = nova_url
     return c
 
 
@@ -1042,11 +1043,11 @@ def list_extensions(nova_api):
     """List all nova extensions, except the ones in the blacklist."""
     blacklist = set(getattr(settings,
                             'OPENSTACK_NOVA_EXTENSIONS_BLACKLIST', []))
-    return [
+    return tuple(
         extension for extension in
         nova_list_extensions.ListExtManager(nova_api).show_all()
         if extension.name not in blacklist
-    ]
+    )
 
 
 @memoized_with_request(list_extensions, 1)

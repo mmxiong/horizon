@@ -9,13 +9,13 @@
 # Yuko Katabami <yukokatabami@gmail.com>, 2016. #zanata
 msgid ""
 msgstr ""
-"Project-Id-Version: horizon 10.0.0.0b2.dev197\n"
+"Project-Id-Version: horizon 10.0.0.0b2.dev324\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/openstack-i18n/\n"
-"POT-Creation-Date: 2016-06-24 03:21+0000\n"
+"POT-Creation-Date: 2016-07-12 20:13+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-06-24 02:00+0000\n"
+"PO-Revision-Date: 2016-06-30 01:18+0000\n"
 "Last-Translator: Shu Muto <shu-mutou@rf.jp.nec.com>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
@@ -361,14 +361,6 @@ msgid "Active"
 msgstr "稼働中"
 
 msgctxt "Current status of a Pool"
-msgid "Active"
-msgstr "稼働中"
-
-msgctxt "Current status of a VPN Service"
-msgid "Active"
-msgstr "稼働中"
-
-msgctxt "Current status of an IPSec Site Connection"
 msgid "Active"
 msgstr "稼働中"
 
@@ -1946,10 +1938,6 @@ msgctxt "Current status of a Pool"
 msgid "Created"
 msgstr "作成済み"
 
-msgctxt "Current status of a VPN Service"
-msgid "Created"
-msgstr "作成済み"
-
 #, python-format
 msgid "Created extra spec \"%s\"."
 msgstr "追加スペック \"%s\" を作成しました。"
@@ -2869,14 +2857,6 @@ msgctxt "Current status of a Pool"
 msgid "Down"
 msgstr "停止中"
 
-msgctxt "Current status of a VPN Service"
-msgid "Down"
-msgstr "停止中"
-
-msgctxt "Current status of an IPSec Site Connection"
-msgid "Down"
-msgstr "停止中"
-
 msgctxt "current status of port"
 msgid "Down"
 msgstr "停止中"
@@ -3169,10 +3149,6 @@ msgstr "ICMP コードが (-1, 255) の範囲ではありません"
 msgid "Enter a value for ICMP type in the range (-1: 255)"
 msgstr "ICMP タイプの値が (-1, 255) の範囲ではありません"
 
-msgid "Enter an integer value between 0 and 255 (or -1 which means wildcard)."
-msgstr ""
-"0 以上 255 以下の整数値 (またはすべてを意味する -1) を入力してください。"
-
 msgid "Enter an integer value between 1 and 65535."
 msgstr "1 から 65535 までの整数値を入力してください。"
 
@@ -3229,19 +3205,11 @@ msgctxt "Current status of a Pool"
 msgid "Error"
 msgstr "エラー"
 
-msgctxt "Current status of a VPN Service"
-msgid "Error"
-msgstr "エラー"
-
 msgctxt "Current status of a Volume"
 msgid "Error"
 msgstr "エラー"
 
 msgctxt "Current status of a Volume Backup"
-msgid "Error"
-msgstr "エラー"
-
-msgctxt "Current status of an IPSec Site Connection"
 msgid "Error"
 msgstr "エラー"
 
@@ -3809,6 +3777,9 @@ msgstr "フレーバー情報"
 msgid "Flavor Name"
 msgstr "フレーバー名"
 
+msgid "Flavor name cannot be empty."
+msgstr "フレーバー名を空にすることはできません"
+
 msgid "Flavors"
 msgstr "フレーバー"
 
@@ -3974,13 +3945,6 @@ msgstr ""
 "グループを使うと、複数のユーザーに対するアクセス権やロールの割り当てを一度に"
 "行うことができます。グループを作成した後で、グループに追加するユーザーの編集"
 "を行います。"
-
-msgid ""
-"Groups are used to manage access and assign roles to multiple users at once. "
-"Edit the group to add users."
-msgstr ""
-"グループを使うと、複数のユーザーに対するアクセス権やロールの割り当てを一度で"
-"行うことができます。グループに追加するユーザーを編集できます。"
 
 #. Translators: High Availability mode of Neutron router
 msgid "HA mode"
@@ -4420,10 +4384,6 @@ msgid "Inactive"
 msgstr "非稼働"
 
 msgctxt "Current status of a Pool"
-msgid "Inactive"
-msgstr "非稼働"
-
-msgctxt "Current status of a VPN Service"
 msgid "Inactive"
 msgstr "非稼働"
 
@@ -5400,9 +5360,6 @@ msgstr "使用可能なプロジェクトがありません"
 msgid "No flavors available"
 msgstr "利用可能なフレーバーがありません"
 
-msgid "No flavors meet minimum criteria for selected image."
-msgstr "選択したイメージの最小限の要件を満たすフレーバーがありません。"
-
 msgid "No floating IP addresses allocated"
 msgstr "確保済みの Floating IP アドレスはありません"
 
@@ -5867,19 +5824,11 @@ msgctxt "Current status of a Pool"
 msgid "Pending Create"
 msgstr "作成待ち"
 
-msgctxt "Current status of a VPN Service"
-msgid "Pending Create"
-msgstr "作成待ち"
-
 msgctxt "Current status of a Firewall"
 msgid "Pending Delete"
 msgstr "削除待ち"
 
 msgctxt "Current status of a Pool"
-msgid "Pending Delete"
-msgstr "削除待ち"
-
-msgctxt "Current status of a VPN Service"
 msgid "Pending Delete"
 msgstr "削除待ち"
 
@@ -5892,10 +5841,6 @@ msgid "Pending Update"
 msgstr "更新待ち"
 
 msgctxt "Current status of a Pool"
-msgid "Pending Update"
-msgstr "更新待ち"
-
-msgctxt "Current status of a VPN Service"
 msgid "Pending Update"
 msgstr "更新待ち"
 
@@ -7225,6 +7170,9 @@ msgstr "Cinder サービスが無効になっています。"
 msgid "Service Endpoint"
 msgstr "サービスエンドポイント"
 
+msgid "Service Neutron is disabled."
+msgstr "Neutron サービスが無効になっています。"
+
 msgid "Service Nova is disabled."
 msgstr "Nova サービスが無効になっています。"
 
@@ -7418,9 +7366,6 @@ msgstr[0] "インスタンスのソフトリブート"
 msgid "Soft Rebooted Instance"
 msgid_plural "Soft Rebooted Instances"
 msgstr[0] "インスタンスのソフトリブートを行いました"
-
-msgid "Some flavors not meeting minimum image requirements have been disabled."
-msgstr "イメージの最小限の要件を満たしていないフレーバーが無効になっています。"
 
 msgid "Something went wrong!"
 msgstr "どこかがおかしくなりました！"
@@ -10875,6 +10820,3 @@ msgstr "v1"
 
 msgid "v2"
 msgstr "v2"
-
-msgid "yes,no,-"
-msgstr "はい,いいえ,-"

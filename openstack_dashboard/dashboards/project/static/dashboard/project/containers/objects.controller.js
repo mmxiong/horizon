@@ -81,8 +81,7 @@
     ctrl.tableConfig = {
       selectAll: true,
       expand: false,
-      trackId: 'name',
-      searchColumnSpan: 6,
+      trackId: 'path',
       columns: [
         {
           id: 'name', title: 'Name', priority: 1, sortDefault: true,

@@ -4,13 +4,13 @@
 # Rob Cresswell <robert.cresswell@outlook.com>, 2016. #zanata
 msgid ""
 msgstr ""
-"Project-Id-Version: horizon 10.0.0.0b2.dev186\n"
+"Project-Id-Version: horizon 10.0.0.0b2.dev310\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/openstack-i18n/\n"
-"POT-Creation-Date: 2016-06-22 21:54+0000\n"
+"POT-Creation-Date: 2016-07-11 21:28+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-06-20 11:07+0000\n"
+"PO-Revision-Date: 2016-07-11 03:09+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English (United Kingdom)\n"
 "Language: en-GB\n"
@@ -50,6 +50,33 @@ msgstr "6"
 msgid "7"
 msgstr "7"
 
+msgid ""
+"<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button> "
+"<strong>Heads up!</strong> This <a href=\"#\" class=\"alert-link\">alert "
+"needs your attention</a>, but it's not super important."
+msgstr ""
+"<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button> "
+"<strong>Heads up!</strong> This <a href=\"#\" class=\"alert-link\">alert "
+"needs your attention</a>, but it's not super important."
+
+msgid ""
+"<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button> "
+"<strong>Oh snap!</strong> <a href=\"#\" class=\"alert-link\">Change a few "
+"things up</a> and try submitting again."
+msgstr ""
+"<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button> "
+"<strong>Oh snap!</strong> <a href=\"#\" class=\"alert-link\">Change a few "
+"things up</a> and try submitting again."
+
+msgid ""
+"<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button> "
+"<strong>Well done!</strong> You successfully read <a href=\"#\" class="
+"\"alert-link\">this important alert message</a>."
+msgstr ""
+"<button type=\"button\" class=\"close\" data-dismiss=\"alert\">×</button> "
+"<strong>Well done!</strong> You successfully read <a href=\"#\" class="
+"\"alert-link\">this important alert message</a>."
+
 msgid "<li><b>Image</b>: This option uses an image to boot the instance.</li>"
 msgstr "<li><b>Image</b>: This option uses an image to boot the instance.</li>"
 
@@ -64,23 +91,28 @@ msgid "<small>This line of text is meant to be treated as fine print.</small>"
 msgstr "<small>This line of text is meant to be treated as fine print.</small>"
 
 msgid ""
-"A floating IP allows instances to be addressable from an external network.\n"
-"    Floating IPs are not allocated to instances at creation time and may be "
-"assigned\n"
-"    after the instance is created. To attach a floating IP, go to the "
-"<b>Instances</b>\n"
-"    view and click the <b>Actions</b> menu to the right of an instance.\n"
-"    Then, select the <b>Associate Floating IP</b> option and enter the "
-"necessary details."
+"A container is a storage compartment for your data and provides a way for "
+"you to organize your data. You can think of a container as a folder in "
+"Windows® or a directory in UNIX®. The primary difference between a container "
+"and these other file system concepts is that containers cannot be nested. "
+"You can, however, create an unlimited number of containers within your "
+"account. Data must be stored in a container so you must have at least one "
+"container defined in your account prior to uploading data."
 msgstr ""
-"A floating IP allows instances to be addressable from an external network.\n"
-"    Floating IPs are not allocated to instances at creation time and may be "
-"assigned\n"
-"    after the instance is created. To attach a floating IP, go to the "
-"<b>Instances</b>\n"
-"    view and click the <b>Actions</b> menu to the right of an instance.\n"
-"    Then, select the <b>Associate Floating IP</b> option and enter the "
-"necessary details."
+"A container is a storage compartment for your data and provides a way for "
+"you to organise your data. You can think of a container as a folder in "
+"Windows® or a directory in UNIX®. The primary difference between a container "
+"and these other file system concepts is that containers cannot be nested. "
+"You can, however, create an unlimited number of containers within your "
+"account. Data must be stored in a container so you must have at least one "
+"container defined in your account prior to uploading data."
+
+msgid ""
+"A key pair named '{$ctrl.createdKeypair.name$}' was successfully created. "
+"This key pair should automatically download."
+msgstr ""
+"A key pair named '{$ctrl.createdKeypair.name$}' was successfully created. "
+"This key pair should automatically download."
 
 msgid ""
 "A longer block of help text that breaks onto a new line and may extend "
@@ -94,6 +126,15 @@ msgstr "A name is required for your instance."
 
 msgid "A port represents a virtual switch port on a logical network switch."
 msgstr "A port represents a virtual switch port on a logical network switch."
+
+msgid "AKI"
+msgstr "AKI"
+
+msgid "AMI"
+msgstr "AMI"
+
+msgid "ARI"
+msgstr "ARI"
 
 msgid "Action"
 msgstr "Action"
@@ -129,21 +170,6 @@ msgid "Alerts"
 msgstr "Alerts"
 
 msgid ""
-"An <b>External</b> network is set up by an administrator.\n"
-"    If you want an instance to communicate outside of the data center,\n"
-"    then attach a router between your <b>Project</b> network and the "
-"<b>External</b> network.\n"
-"    You can use the <b>Network Topology</b> view to connect the router to "
-"the two networks."
-msgstr ""
-"An <b>External</b> network is set up by an administrator.\n"
-"    If you want an instance to communicate outside of the data center,\n"
-"    then attach a router between your <b>Project</b> network and the "
-"<b>External</b> network.\n"
-"    You can use the <b>Network Topology</b> view to connect the router to "
-"the two networks."
-
-msgid ""
 "An abbreviation of the word attribute is <abbr title=\"attribute\">attr</"
 "abbr>."
 msgstr ""
@@ -167,6 +193,9 @@ msgid ""
 msgstr ""
 "An instance name is required and used to help you uniquely identify your "
 "instance in the dashboard."
+
+msgid "Animated"
+msgstr "Animated"
 
 msgid "Another action"
 msgstr "Another action"
@@ -183,6 +212,15 @@ msgstr "Availability Zone"
 
 msgid "Available Scheduler Hints"
 msgstr "Available Scheduler Hints"
+
+msgid "Badges"
+msgstr "Badges"
+
+msgid "Basic"
+msgstr "Basic"
+
+msgid "Basic panel"
+msgstr "Basic panel"
 
 msgid "Block level button"
 msgstr "Block level button"
@@ -235,6 +273,9 @@ msgstr "Click to see more details"
 msgid "Close"
 msgstr "Close"
 
+msgid "Collecting information for deletion:"
+msgstr "Collecting information for deletion:"
+
 msgid "Color"
 msgstr "Colour"
 
@@ -268,17 +309,53 @@ msgstr "Container %(name)s deleted."
 msgid "Container %(name)s is now %(access)s."
 msgstr "Container %(name)s is now %(access)s."
 
+msgid "Container Access"
+msgstr "Container Access"
+
+msgid "Container Name"
+msgstr "Container Name"
+
+msgid "Container name must not contain \"/\"."
+msgstr "Container name must not contain \"/\"."
+
 msgid "Containers"
 msgstr "Containers"
 
+msgid "Content Type"
+msgstr "Content Type"
+
+msgid "Contextual alternatives"
+msgstr "Contextual alternatives"
+
+msgid "Count"
+msgstr "Count"
+
+msgid "Create"
+msgstr "Create"
+
+msgid "Create Container"
+msgstr "Create Container"
+
+msgid "Create Folder"
+msgstr "Create Folder"
+
+msgid "Create Folder In: {$ ctrl.model.container.name $}"
+msgstr "Create Folder In: {$ ctrl.model.container.name $}"
+
 msgid "Create Key Pair"
 msgstr "Create Key Pair"
+
+msgid "Create Keypair"
+msgstr "Create Keypair"
 
 msgid "Create New Volume"
 msgstr "Create New Volume"
 
 msgid "Created"
 msgstr "Created"
+
+msgid "Created keypair: "
+msgstr "Created keypair: "
 
 msgid ""
 "Custom scripts are attached to instances to perform specific actions when "
@@ -306,6 +383,9 @@ msgstr "Data"
 msgid "Date"
 msgstr "Date"
 
+msgid "Date Created"
+msgstr "Date Created"
+
 msgid "Datetime"
 msgstr "Datetime"
 
@@ -324,11 +404,20 @@ msgstr "Default button"
 msgid "Default input"
 msgstr "Default input"
 
+msgid "Delete"
+msgstr "Delete"
+
 msgid "Delete Container"
 msgstr "Delete Container"
 
+msgid "Delete Files in {$ ctrl.model.container.name $}"
+msgstr "Delete Files in {$ ctrl.model.container.name $}"
+
 msgid "Deleted"
 msgstr "Deleted"
+
+msgid "Deleting:"
+msgstr "Deleting:"
 
 msgid "Description"
 msgstr "Description"
@@ -360,6 +449,12 @@ msgstr "Disabled input here..."
 msgid "Disk Partition"
 msgstr "Disk Partition"
 
+msgid "Distribution Charts"
+msgstr "Distribution Charts"
+
+msgid "Docker"
+msgstr "Docker"
+
 msgid "Domain ID"
 msgstr "Domain ID"
 
@@ -389,6 +484,9 @@ msgstr "Emphasis classes"
 
 msgid "Enabled"
 msgstr "Enabled"
+
+msgid "Encountered {$ ctrl.model.counted.folders $} failures."
+msgstr "Encountered {$ ctrl.model.counted.folders $} failures."
 
 msgid "Ephemeral Disk"
 msgstr "Ephemeral Disk"
@@ -448,24 +546,14 @@ msgstr "Folder"
 msgid "Folder %(name)s created."
 msgstr "Folder %(name)s created."
 
+msgid "Folder Name"
+msgstr "Folder Name"
+
 msgid "Format"
 msgstr "Format"
 
 msgid "Forms"
 msgstr "Forms"
-
-msgid ""
-"From a Windows system, you can use PuTTYGen to create private/public keys.\n"
-"  Use the PuTTY Key Generator to create and save the keys, then copy\n"
-"  the public key in the red highlighted box to your <samp>.ssh/"
-"authorized_keys</samp>\n"
-"  file."
-msgstr ""
-"From a Windows system, you can use PuTTYGen to create private/public keys.\n"
-"  Use the PuTTY Key Generator to create and save the keys, then copy\n"
-"  the public key in the red highlighted box to your <samp>.ssh/"
-"authorized_keys</samp>\n"
-"  file."
 
 msgid "Hash"
 msgstr "Hash"
@@ -513,6 +601,20 @@ msgstr ""
 "If a security group is not associated with an instance before it is "
 "launched, then you will have very limited access to the instance after it is "
 "deployed. You will only be able to access the instance from a VNC console."
+
+msgid "If not, you can manually dowload this keypair at the following link:"
+msgstr "If not, you can manually download this keypair at the following link:"
+
+msgid ""
+"If you select an availability zone and plan to use the 'boot from volume' "
+"option in the Source step, make sure that the availability zone you select "
+"for the instance is the same availability zone where your bootable volume "
+"resides."
+msgstr ""
+"If you select an availability zone and plan to use the 'boot from volume' "
+"option in the Source step, make sure that the availability zone you select "
+"for the instance is the same availability zone where your bootable volume "
+"resides."
 
 msgid ""
 "If you want to create an instance that uses ephemeral storage, meaning the "
@@ -577,6 +679,9 @@ msgstr "Input success"
 msgid "Input warning"
 msgstr "Input warning"
 
+msgid "Instance Name"
+msgstr "Instance Name"
+
 msgid "Instance Snapshot"
 msgstr "Instance Snapshot"
 
@@ -586,11 +691,41 @@ msgstr "Instance count is required and must be an integer of at least 1"
 msgid "Insufficient privilege level to view user information."
 msgstr "Insufficient privilege level to view user information."
 
+msgid "Jumbotron"
+msgstr "Jumbotron"
+
 msgid "Key Pair"
 msgstr "Key Pair"
 
+msgid "Key Pair Name <span class=\"hz-icon-required fa fa-asterisk\"></span>"
+msgstr "Key Pair Name <span class=\"hz-icon-required fa fa-asterisk\"></span>"
+
+msgid ""
+"Key Pairs are how you login to your instance after it is launched. Choose a "
+"key pair name you will recognize and paste your SSH public key into the "
+"space provided."
+msgstr ""
+"Key Pairs are how you login to your instance after it is launched. Choose a "
+"key pair name you will recognise and paste your SSH public key into the "
+"space provided."
+
+msgid ""
+"Key Pairs are how you login to your instance after it is launched. Choose a "
+"key pair name you will recognize. Names may only include alphanumeric "
+"characters, spaces, or dashes."
+msgstr ""
+"Key Pairs are how you login to your instance after it is launched. Choose a "
+"key pair name you will recognise. Names may only include alphanumeric "
+"characters, spaces, or dashes."
+
+msgid "Keypair already exists or name contains bad characters."
+msgstr "Keypair already exists or name contains bad characters."
+
 msgid "Killed"
 msgstr "Killed"
+
+msgid "Large Modal"
+msgstr "Large Modal"
 
 msgid "Large button"
 msgstr "Large button"
@@ -601,6 +736,9 @@ msgstr "Large input"
 msgid "Launch Instance"
 msgstr "Launch Instance"
 
+msgid "Learn more"
+msgstr "Learn more"
+
 msgid "Left"
 msgstr "Left"
 
@@ -610,8 +748,17 @@ msgstr "Legend"
 msgid "Library"
 msgstr "Library"
 
+msgid "Line Charts"
+msgstr "Line Charts"
+
 msgid "Link"
 msgstr "Link"
+
+msgid "List group item heading"
+msgstr "List group item heading"
+
+msgid "List groups"
+msgstr "List groups"
 
 msgid "Look, I'm in a large well!"
 msgstr "Look, I'm in a large well!"
@@ -630,6 +777,9 @@ msgstr "Manual"
 
 msgid "Max Port"
 msgstr "Max Port"
+
+msgid "Messages"
+msgstr "Messages"
 
 msgid "Metadata"
 msgstr "Metadata"
@@ -705,18 +855,45 @@ msgid "Normal"
 msgstr "Normal"
 
 msgid ""
-"Note: Delimiters ('{$ ctrl.model.DELIMETER $}') are allowed in the\n"
-"          file name to place the new file into a folder that will be "
-"created\n"
-"          when the file is uploaded (to any depth of folders)."
+"Note: A Public Container will allow anyone with the Public URL to gain "
+"access to your objects in the container."
 msgstr ""
-"Note: Delimiters ('{$ ctrl.model.DELIMETER $}') are allowed in the\n"
-"          file name to place the new file into a folder that will be "
-"created\n"
-"          when the file is uploaded (to any depth of folders)."
+"Note: A Public Container will allow anyone with the Public URL to gain "
+"access to your objects in the container."
+
+msgid ""
+"Note: Delimiters ('{$ ctrl.model.DELIMETER $}') are allowed in the file name "
+"to place the new file into a folder that will be created when the file is "
+"uploaded (to any depth of folders)."
+msgstr ""
+"Note: Delimiters ('{$ ctrl.model.DELIMETER $}') are allowed in the file name "
+"to place the new file into a folder that will be created when the file is "
+"uploaded (to any depth of folders)."
+
+msgid ""
+"Note: Delimiters ('{$ ctrl.model.DELIMETER $}') are allowed in the folder "
+"name to create deep folders."
+msgstr ""
+"Note: Delimiters ('{$ ctrl.model.DELIMETER $}') are allowed in the folder "
+"name to create deep folders."
+
+msgid "Note: you will not be able to download this later."
+msgstr "Note: you will not be able to download this later."
 
 msgid "Number"
 msgstr "Number"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Object Count"
+msgstr "Object Count"
+
+msgid "Object Details"
+msgstr "Object Details"
+
+msgid "Ok"
+msgstr "Ok"
 
 msgid "Older"
 msgstr "Older"
@@ -724,8 +901,20 @@ msgstr "Older"
 msgid "One fine body…"
 msgstr "One fine body…"
 
+msgid "One large body…"
+msgstr "One large body…"
+
 msgid "One more separated link"
 msgstr "One more separated link"
+
+msgid "One small body…"
+msgstr "One small body…"
+
+msgid "One super large body…"
+msgstr "One super large body…"
+
+msgid "One tiny body…"
+msgstr "One tiny body…"
 
 msgid "Option one is this"
 msgstr "Option one is this"
@@ -766,6 +955,9 @@ msgstr "Panel success"
 msgid "Panel warning"
 msgstr "Panel warning"
 
+msgid "Panels"
+msgstr "Panels"
+
 msgid "Password"
 msgstr "Password"
 
@@ -777,6 +969,18 @@ msgstr "Physical Network"
 
 msgid "Pills"
 msgstr "Pills"
+
+msgid ""
+"Please provide the initial hostname for the instance, the availability zone "
+"where it will be deployed, and the instance count. Increase the Count to "
+"create multiple instances with the same settings."
+msgstr ""
+"Please provide the initial hostname for the instance, the availability zone "
+"where it will be deployed, and the instance count. Increase the Count to "
+"create multiple instances with the same settings."
+
+msgid "Please try again."
+msgstr "Please try again."
 
 msgid "Policy check failed."
 msgstr "Policy check failed."
@@ -821,13 +1025,6 @@ msgstr "Project"
 msgid "Project ID"
 msgstr "Project ID"
 
-msgid ""
-"Project networks are created by users.\n"
-"    These networks are fully isolated and are project-specific."
-msgstr ""
-"Project networks are created by users.\n"
-"    These networks are fully isolated and are project-specific."
-
 msgid "Protected"
 msgstr "Protected"
 
@@ -837,18 +1034,17 @@ msgstr "Protocol"
 msgid "Provider Network"
 msgstr "Provider Network"
 
-msgid ""
-"Provider networks are created by administrators.\n"
-"    These networks map to an existing physical network in the data center."
-msgstr ""
-"Provider networks are created by administrators.\n"
-"    These networks map to an existing physical network in the data center."
-
 msgid "Public"
 msgstr "Public"
 
+msgid "Public Access"
+msgstr "Public Access"
+
 msgid "Public Key"
 msgstr "Public Key"
+
+msgid "Public Key <span class=\"hz-icon-required fa fa-asterisk\"></span>"
+msgstr "Public Key <span class=\"hz-icon-required fa fa-asterisk\"></span>"
 
 msgid "Queued"
 msgstr "Queued"
@@ -859,11 +1055,17 @@ msgstr "RAM"
 msgid "RX/TX factor"
 msgstr "RX/TX factor"
 
+msgid "Radios"
+msgstr "Radios"
+
 msgid "Re-order items using drag and drop"
 msgstr "Re-order items using drag and drop"
 
 msgid "Remote"
 msgstr "Remote"
+
+msgid "Required"
+msgstr "Required"
 
 msgid "Right"
 msgstr "Right"
@@ -921,6 +1123,9 @@ msgstr "Segmentation ID"
 
 msgid "Select Boot Source"
 msgstr "Select Boot Source"
+
+msgid "Select Title"
+msgstr "Select Title"
 
 msgid "Select a container to browse."
 msgstr "Select a container to browse."
@@ -981,6 +1186,9 @@ msgstr "Size"
 msgid "Size (GB)"
 msgstr "Size (GB)"
 
+msgid "Small Modal"
+msgstr "Small Modal"
+
 msgid "Small button"
 msgstr "Small button"
 
@@ -1005,11 +1213,20 @@ msgstr "Source Code"
 msgid "Source Title"
 msgstr "Source Title"
 
+msgid "Stacked"
+msgstr "Stacked"
+
+msgid "Standard Modal"
+msgstr "Standard Modal"
+
 msgid "Standard Table"
 msgstr "Standard Table"
 
 msgid "Status"
 msgstr "Status"
+
+msgid "Striped"
+msgstr "Striped"
 
 msgid "Submit"
 msgstr "Submit"
@@ -1080,6 +1297,13 @@ msgstr ""
 "The logical port also defines the MAC address and the IP address(es) to be "
 "assigned to the interfaces plugged into them."
 
+msgid ""
+"The maximum number of key-value pairs that can be supplied per instance is "
+"determined by the compute provider."
+msgstr ""
+"The maximum number of key-value pairs that can be supplied per instance is "
+"determined by the compute provider."
+
 #, python-format
 msgid ""
 "The selected %(sourceType)s source requires a flavor with at least "
@@ -1106,32 +1330,32 @@ msgstr "The status indicates whether the network has an active connection."
 msgid "The status indicates whether the port has an active connection."
 msgstr "The status indicates whether the port has an active connection."
 
-msgid ""
-"The subnet identifies a sub-section of a network. A subnet is specified in "
-"CIDR format.\n"
-"    A typical CIDR format looks like <samp>192.xxx.x.x/24</samp>."
-msgstr ""
-"The subnet identifies a sub-section of a network. A subnet is specified in "
-"CIDR format.\n"
-"    A typical CIDR format looks like <samp>192.xxx.x.x/24</samp>."
-
 #, python-format
 msgid "The volume size must be at least %(minVolumeSize)s GB"
 msgstr "The volume size must be at least %(minVolumeSize)s GB"
 
-msgid ""
-"There are two ways to generate a key pair. From a Linux system,\n"
-"  generate the key pair with the <samp>ssh-keygen</samp> command:"
-msgstr ""
-"There are two ways to generate a key pair. From a Linux system,\n"
-"  generate the key pair with the <samp>ssh-keygen</samp> command:"
+msgid "Themable Checkbox"
+msgstr "Themable Checkbox"
+
+msgid "Themable Selects"
+msgstr "Themable Selects"
+
+msgid "There are no Availability Zones."
+msgstr "There are no Availability Zones."
 
 msgid ""
-"This command generates a pair of keys: a private key (cloud.key)\n"
-"  and a public key (cloud.key.pub)."
+"There are two ways to generate a key pair. From a Linux system, generate the "
+"key pair with the <samp>ssh-keygen</samp> command:"
 msgstr ""
-"This command generates a pair of keys: a private key (cloud.key)\n"
-"  and a public key (cloud.key.pub)."
+"There are two ways to generate a key pair. From a Linux system, generate the "
+"key pair with the <samp>ssh-keygen</samp> command:"
+
+msgid ""
+"This command generates a pair of keys: a private key (cloud.key) and a "
+"public key (cloud.key.pub)."
+msgstr ""
+"This command generates a pair of keys: a private key (cloud.key) and a "
+"public key (cloud.key.pub)."
 
 msgid ""
 "This flavor requires more RAM than your quota allows. Please select a "
@@ -1147,8 +1371,21 @@ msgstr ""
 "This flavour requires more VCPUs than your quota allows. Please select a "
 "smaller flavour or decrease the instance count."
 
+msgid ""
+"This is a simple hero unit, a simple jumbotron-style component for calling "
+"extra attention to featured content or information."
+msgstr ""
+"This is a simple hero unit, a simple jumbotron-style component for calling "
+"extra attention to featured content or information."
+
 msgid "This is focused..."
 msgstr "This is focused..."
+
+msgid "This limit is currently not set."
+msgstr "This limit is currently not set."
+
+msgid "This limit is currently set to {$ model.novaLimits.maxServerMeta $}."
+msgstr "This limit is currently set to {$ model.novaLimits.maxServerMeta $}."
 
 msgid "This step allows you to add Metadata items to your instance."
 msgstr "This step allows you to add Metadata items to your instance."
@@ -1300,6 +1537,9 @@ msgstr "Unable to edit the user."
 msgid "Unable to fetch the service catalog."
 msgstr "Unable to fetch the service catalog."
 
+msgid "Unable to generate"
+msgstr "Unable to generate"
+
 msgid "Unable to get details of the object."
 msgstr "Unable to get details of the object."
 
@@ -1441,6 +1681,9 @@ msgstr "Uploading"
 msgid "Url"
 msgstr "URL"
 
+msgid "Usage Charts"
+msgstr "Usage Charts"
+
 msgid "User ID"
 msgstr "User ID"
 
@@ -1493,6 +1736,9 @@ msgstr "Warning Button"
 msgid "Warning!"
 msgstr "Warning!"
 
+msgid "Week"
+msgstr "Week"
+
 msgid "Wells"
 msgstr "Wells"
 
@@ -1512,41 +1758,34 @@ msgstr ""
 "When selecting volume as boot source, please ensure the instance's "
 "availability zone is compatible with your volume's availability zone."
 
-msgid ""
-"When the <b>Admin State</b> for a network is set to <b>Up</b>,\n"
-"    then the network is available for use. You can set the <b>Admin State</"
-"b> to <b>Down</b>\n"
-"    if you are not ready for other users to access the network."
-msgstr ""
-"When the <b>Admin State</b> for a network is set to <b>Up</b>,\n"
-"    then the network is available for use. You can set the <b>Admin State</"
-"b> to <b>Down</b>\n"
-"    if you are not ready for other users to access the network."
+msgid "XL Modal"
+msgstr "XL Modal"
 
-msgid ""
-"When the <b>Admin State</b> for a port is set to <b>Up</b> and it has no "
-"<b>Device Owner</b>,\n"
-"    then the port is available for use. You can set the <b>Admin State</b> "
-"to <b>Down</b>\n"
-"    if you are not ready for other users to use the port."
-msgstr ""
-"When the <b>Admin State</b> for a port is set to <b>Up</b> and it has no "
-"<b>Device Owner</b>,\n"
-"    then the port is available for use. You can set the <b>Admin State</b> "
-"to <b>Down</b>\n"
-"    if you are not ready for other users to use the port."
+msgid "XS"
+msgstr "XS"
 
 msgid "Yes"
 msgstr "Yes"
 
 msgid ""
+"You can add arbitrary metadata to your instance so that you can more easily "
+"identify it among other running instances. Metadata is a collection of key-"
+"value pairs associated with an instance. The maximum length for each "
+"metadata key and value is 255 characters."
+msgstr ""
+"You can add arbitrary metadata to your instance so that you can more easily "
+"identify it among other running instances. Metadata is a collection of key-"
+"value pairs associated with an instance. The maximum length for each "
+"metadata key and value is 255 characters."
+
+msgid ""
 "You can customize your instance after it has launched using the options "
-"available here.\n"
-"    \"Customization Script\" is analogous to \"User Data\" in other systems."
+"available here. \"Customization Script\" is analogous to \"User Data\" in "
+"other systems."
 msgstr ""
 "You can customise your instance after it has launched using the options "
-"available here.\n"
-"    \"Customisation Script\" is analogous to \"User Data\" in other systems."
+"available here. \"Customisation Script\" is analogous to \"User Data\" in "
+"other systems."
 
 msgid ""
 "You can specify scheduler hints by moving items from the left column to the "
@@ -1558,6 +1797,25 @@ msgstr ""
 "right column. In the left column there are scheduler hint definitions from "
 "the Glance Metadata Catalogue. Use the \"Custom\" option to add scheduler "
 "hints with the key of your choice."
+
+msgid "disabled"
+msgstr "disabled"
+
+msgid "image"
+msgstr "image"
+
+msgid "link"
+msgstr "link"
+
+msgid "snapshot"
+msgstr "snapshot"
+
+msgid ""
+"{$ ctrl.model.counted.files $} files in {$ ctrl.model.counted.folders $} "
+"folders."
+msgstr ""
+"{$ ctrl.model.counted.files $} files in {$ ctrl.model.counted.folders $} "
+"folders."
 
 msgid "{$ row['provider:network_type'] $}"
 msgstr "{$ row['provider:network_type'] $}"

@@ -5,13 +5,13 @@
 # Rob Cresswell <robert.cresswell@outlook.com>, 2016. #zanata
 msgid ""
 msgstr ""
-"Project-Id-Version: horizon 10.0.0.0b2.dev164\n"
+"Project-Id-Version: horizon 10.0.0.0b2.dev324\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/openstack-i18n/\n"
-"POT-Creation-Date: 2016-06-21 03:36+0000\n"
+"POT-Creation-Date: 2016-07-12 20:13+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-06-20 11:06+0000\n"
+"PO-Revision-Date: 2016-07-05 11:59+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English (United Kingdom)\n"
 "Language: en-GB\n"
@@ -354,11 +354,7 @@ msgctxt "Current status of a Pool"
 msgid "Active"
 msgstr "Active"
 
-msgctxt "Current status of a VPN Service"
-msgid "Active"
-msgstr "Active"
-
-msgctxt "Current status of an IPSec Site Connection"
+msgctxt "Current status of an IPSec Site Connection and VPN Service"
 msgid "Active"
 msgstr "Active"
 
@@ -896,6 +892,12 @@ msgstr "Attach To Instance"
 
 msgid "Attach Volume"
 msgstr "Attach Volume"
+
+msgid "Attach Volume to Running Instance."
+msgstr "Attach Volume to Running Instance."
+
+msgid "Attach a Volume"
+msgstr "Attach a Volume"
 
 msgid "Attach to Instance"
 msgstr "Attach to Instance"
@@ -1981,7 +1983,7 @@ msgctxt "Current status of a Pool"
 msgid "Created"
 msgstr "Created"
 
-msgctxt "Current status of a VPN Service"
+msgctxt "Current status of an IPSec Site Connection and VPN Service"
 msgid "Created"
 msgstr "Created"
 
@@ -2783,6 +2785,12 @@ msgid_plural "Detach Volumes"
 msgstr[0] "Detach Volume"
 msgstr[1] "Detach Volumes"
 
+msgid "Detach Volume from Running Instance."
+msgstr "Detach Volume from Running Instance."
+
+msgid "Detach a Volume"
+msgstr "Detach a Volume"
+
 msgid "Detached"
 msgstr "Detached"
 
@@ -2801,6 +2809,10 @@ msgid "Detaching Volume"
 msgid_plural "Detaching Volumes"
 msgstr[0] "Detaching Volume"
 msgstr[1] "Detaching Volumes"
+
+#, python-format
+msgid "Detaching volume %(vol)s from instance %(inst)s."
+msgstr "Detaching volume %(vol)s from instance %(inst)s."
 
 msgid "Details"
 msgstr "Details"
@@ -3008,11 +3020,7 @@ msgctxt "Current status of a Pool"
 msgid "Down"
 msgstr "Down"
 
-msgctxt "Current status of a VPN Service"
-msgid "Down"
-msgstr "Down"
-
-msgctxt "Current status of an IPSec Site Connection"
+msgctxt "Current status of an IPSec Site Connection and VPN Service"
 msgid "Down"
 msgstr "Down"
 
@@ -3314,8 +3322,8 @@ msgstr "Enter a value for ICMP code in the range (-1: 255)"
 msgid "Enter a value for ICMP type in the range (-1: 255)"
 msgstr "Enter a value for ICMP type in the range (-1: 255)"
 
-msgid "Enter an integer value between 0 and 255 (or -1 which means wildcard)."
-msgstr "Enter an integer value between 0 and 255 (or -1 which means wildcard)."
+msgid "Enter an integer value between 0 and 255."
+msgstr "Enter an integer value between 0 and 255."
 
 msgid "Enter an integer value between 1 and 65535."
 msgstr "Enter an integer value between 1 and 65535."
@@ -3379,10 +3387,6 @@ msgctxt "Current status of a Pool"
 msgid "Error"
 msgstr "Error"
 
-msgctxt "Current status of a VPN Service"
-msgid "Error"
-msgstr "Error"
-
 msgctxt "Current status of a Volume"
 msgid "Error"
 msgstr "Error"
@@ -3391,7 +3395,7 @@ msgctxt "Current status of a Volume Backup"
 msgid "Error"
 msgstr "Error"
 
-msgctxt "Current status of an IPSec Site Connection"
+msgctxt "Current status of an IPSec Site Connection and VPN Service"
 msgid "Error"
 msgstr "Error"
 
@@ -3958,6 +3962,9 @@ msgstr "Flavour Information"
 msgid "Flavor Name"
 msgstr "Flavour Name"
 
+msgid "Flavor name cannot be empty."
+msgstr "Flavour name cannot be empty."
+
 msgid "Flavors"
 msgstr "Flavours"
 
@@ -4121,13 +4128,6 @@ msgid ""
 msgstr ""
 "Groups are used to manage access and assign roles to multiple users at once. "
 "After creating the group, edit the group to add users."
-
-msgid ""
-"Groups are used to manage access and assign roles to multiple users at once. "
-"Edit the group to add users."
-msgstr ""
-"Groups are used to manage access and assign roles to multiple users at once. "
-"Edit the group to add users."
 
 #. Translators: High Availability mode of Neutron router
 msgid "HA mode"
@@ -4575,7 +4575,7 @@ msgctxt "Current status of a Pool"
 msgid "Inactive"
 msgstr "Inactive"
 
-msgctxt "Current status of a VPN Service"
+msgctxt "Current status of an IPSec Site Connection and VPN Service"
 msgid "Inactive"
 msgstr "Inactive"
 
@@ -5564,8 +5564,8 @@ msgstr "No available projects"
 msgid "No flavors available"
 msgstr "No flavours available"
 
-msgid "No flavors meet minimum criteria for selected image."
-msgstr "No flavours meet minimum criteria for selected image."
+msgid "No flavors meet minimum criteria for selected boot source."
+msgstr "No flavours meet minimum criteria for selected boot source."
 
 msgid "No floating IP addresses allocated"
 msgstr "No floating IP addresses allocated"
@@ -5690,6 +5690,9 @@ msgstr "No volume types found."
 
 msgid "No volume types selected."
 msgstr "No volume types selected."
+
+msgid "No volumes attached"
+msgstr "No volumes attached"
 
 msgid "No volumes attached."
 msgstr "No volumes attached."
@@ -6032,7 +6035,7 @@ msgctxt "Current status of a Pool"
 msgid "Pending Create"
 msgstr "Pending Create"
 
-msgctxt "Current status of a VPN Service"
+msgctxt "Current status of an IPSec Site Connection and VPN Service"
 msgid "Pending Create"
 msgstr "Pending Create"
 
@@ -6044,7 +6047,7 @@ msgctxt "Current status of a Pool"
 msgid "Pending Delete"
 msgstr "Pending Delete"
 
-msgctxt "Current status of a VPN Service"
+msgctxt "Current status of an IPSec Site Connection and VPN Service"
 msgid "Pending Delete"
 msgstr "Pending Delete"
 
@@ -6060,7 +6063,7 @@ msgctxt "Current status of a Pool"
 msgid "Pending Update"
 msgstr "Pending Update"
 
-msgctxt "Current status of a VPN Service"
+msgctxt "Current status of an IPSec Site Connection and VPN Service"
 msgid "Pending Update"
 msgstr "Pending Update"
 
@@ -6752,6 +6755,9 @@ msgstr "Resource Metadata"
 msgid "Resource Types"
 msgstr "Resource Types"
 
+msgid "Resource Types ="
+msgstr "Resource Types ="
+
 msgid "Resource Usage"
 msgstr "Resource Usage"
 
@@ -7297,6 +7303,15 @@ msgstr "Select a target host"
 msgid "Select a template to launch a stack."
 msgstr "Select a template to launch a stack."
 
+msgid "Select a volume"
+msgstr "Select a volume"
+
+msgid "Select a volume to attach to this instance."
+msgstr "Select a volume to attach to this instance."
+
+msgid "Select a volume to detach from this instance."
+msgstr "Select a volume to detach from this instance."
+
 msgid "Select a volume to restore to."
 msgstr "Select a volume to restore to."
 
@@ -7415,6 +7430,12 @@ msgstr "Service Cinder is disabled."
 
 msgid "Service Endpoint"
 msgstr "Service Endpoint"
+
+msgid "Service Neutron is disabled or quotas extension not available."
+msgstr "Service Neutron is disabled or quotas extension not available."
+
+msgid "Service Neutron is disabled."
+msgstr "Service Neutron is disabled."
 
 msgid "Service Nova is disabled."
 msgstr "Service Nova is disabled."
@@ -7624,9 +7645,11 @@ msgid_plural "Soft Rebooted Instances"
 msgstr[0] "Soft Rebooted Instance"
 msgstr[1] "Soft Rebooted Instances"
 
-msgid "Some flavors not meeting minimum image requirements have been disabled."
+msgid ""
+"Some flavors not meeting minimum boot source requirements have been disabled."
 msgstr ""
-"Some flavours not meeting minimum image requirements have been disabled."
+"Some flavours not meeting minimum boot source requirements have been "
+"disabled."
 
 msgid "Something went wrong!"
 msgstr "Something went wrong!"
@@ -8902,6 +8925,9 @@ msgstr "Unable to change password."
 msgid "Unable to change the volume type for volume: \"%s\""
 msgstr "Unable to change the volume type for volume: \"%s\""
 
+msgid "Unable to check if DHCP agent scheduler extension is supported"
+msgstr "Unable to check if DHCP agent scheduler extension is supported"
+
 #, python-format
 msgid "Unable to clear gateway for router \"%(name)s\": \"%(msg)s\""
 msgstr "Unable to clear gateway for router \"%(name)s\": \"%(msg)s\""
@@ -9110,6 +9136,9 @@ msgstr "Unable to delete volume transfer."
 
 msgid "Unable to detach interface."
 msgstr "Unable to detach interface."
+
+msgid "Unable to detach volume."
+msgstr "Unable to detach volume."
 
 msgid "Unable to determine if availability zones extension is supported."
 msgstr "Unable to determine if availability zones extension is supported."
@@ -10111,6 +10140,9 @@ msgstr "Unknown Instance"
 msgid "Unknown instance (None)"
 msgstr "Unknown instance (None)"
 
+msgid "Unknown volume (None)"
+msgstr "Unknown volume (None)"
+
 msgid "Unlock Instance"
 msgid_plural "Unlock Instances"
 msgstr[0] "Unlock Instance"
@@ -10642,6 +10674,9 @@ msgstr "Volume Encryption Details: {{ volume.name }}"
 msgid "Volume Encryption Overview"
 msgstr "Volume Encryption Overview"
 
+msgid "Volume ID"
+msgstr "Volume ID"
+
 msgid "Volume Limits"
 msgstr "Volume Limits"
 
@@ -10826,6 +10861,9 @@ msgstr "Volumes are block devices that can be attached to instances."
 msgid "Volumes of Type %(type)s"
 msgstr "Volumes of Type %(type)s"
 
+msgid "Warning: "
+msgstr "Warning: "
+
 msgid "Weight"
 msgstr "Weight"
 
@@ -10936,6 +10974,9 @@ msgid ""
 msgstr ""
 "You do not have the required privileges to access this content. If you "
 "believe this message to be in error, please contact your project manager."
+
+msgid "You have selected:"
+msgstr "You have selected:"
 
 msgid "You may have mistyped the address or the page may have moved."
 msgstr "You may have mistyped the address or the page may have moved."
@@ -11141,6 +11182,3 @@ msgstr "v1"
 
 msgid "v2"
 msgstr "v2"
-
-msgid "yes,no,-"
-msgstr "yes,no,-"
