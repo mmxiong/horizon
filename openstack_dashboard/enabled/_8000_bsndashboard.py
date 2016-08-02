@@ -23,7 +23,7 @@ DISABLED = False
 ADD_EXCEPTIONS = {}
 
 ADD_ANGULAR_MODULES = [
-    'horizon.dashboard.bsndashboard',
+    'bsn.bsndashboard',
 ]
 
 ADD_INSTALLED_APPS = ['horizon_bsn.bsndashboard']

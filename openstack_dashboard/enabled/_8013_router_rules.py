@@ -12,7 +12,7 @@
 # limitations under the License.
 
 # The name of the panel to be added to HORIZON_CONFIG. Required.
-PANEL = 'reachabilitytests'
+PANEL = 'routerrules'
 
 # The name of the dashboard the PANEL associated with. Required.
 PANEL_DASHBOARD = 'bsndashboard'
@@ -20,10 +20,9 @@ PANEL_DASHBOARD = 'bsndashboard'
 DISABLED = False
 
 # Python panel class of the PANEL to be added.
-ADD_PANEL = 'horizon_bsn.bsndashboard.reachabilitytests.panel.Reachabilitytests'
+ADD_PANEL = 'horizon_bsn.bsndashboard.routerrules.panel.Routerrules'
 
 PANEL_GROUP = 'bsnextensions'
 
 # Automatically discover static resources in installed apps
 AUTO_DISCOVER_STATIC_FILES = True
-
