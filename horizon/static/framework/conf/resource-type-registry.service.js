@@ -100,18 +100,13 @@
       self.type = typeCode;
       self.initActions = initActions;
       self.setProperty = setProperty;
-      self.getProperties = getProperties;
       self.getName = getName;
       self.setNames = setNames;
       self.label = label;
-      self.load = defaultLoadFunction;
+      self.load = load;
       self.setLoadFunction = setLoadFunction;
-      self.isLoadFunctionSet = isLoadFunctionSet;
-      self.list = defaultListFunction;
+      self.list = list;
       self.setListFunction = setListFunction;
-      self.isListFunctionSet = isListFunctionSet;
-      self.itemInTransitionFunction = defaultItemInTransitionFunction;
-      self.setItemInTransitionFunction = setItemInTransitionFunction;
       self.itemName = itemName;
       self.setItemNameFunction = setItemNameFunction;
       self.setPathParser = setPathParser;
@@ -194,14 +189,6 @@
       }
 
       /**
-       * Return a copy of any properties that have been registered.
-       * @returns {*}
-       */
-      function getProperties() {
-        return angular.copy(properties);
-      }
-
-      /**
        * @ngdoc function
        * @name setListFunction
        * @description
@@ -229,14 +216,6 @@
       }
 
       /**
-       * True if a list function for this resource has been registered.
-       * @returns {boolean}
-       */
-      function isListFunctionSet() {
-        return self.list !== defaultListFunction;
-      }
-
-      /**
        * @ngdoc function
        * @name list
        * @description
@@ -248,43 +227,9 @@
        var listPromise = resourceType.list();
        ```
        */
-      function defaultListFunction() {
+      function list() {
         $log.error('No list function defined for', typeCode);
         return Promise.reject({data: {items: []}});
-      }
-
-      /**
-       * @ngdoc function
-       * @name defaultItemInTransitionFunction
-       * @description
-       * A default implementation for the "itemInTransitionFunction function-pointer" which
-       * returns false every time.
-       * @returns {boolean}
-       */
-      function defaultItemInTransitionFunction() {
-        return false;
-      }
-
-      /**
-       * Set a function that detects if an instance of this resource type is in a
-       * "transition" state, such as an image with a "queued" status, or an instance
-       * with an "in-progress" status. For example, this might be used to highlight
-       * a particular item in a list, or to set a progress indicator when viewing that
-       * items details.
-       *
-       * By default, a call to itemInTransitionFunction(item) will return false unless this
-       * function is registered for the resource type;
-       *
-       * @ngdoc function
-       * @param func - The callback-function to be used for determining if this
-       * resource is in a transitional state.  This callback-function will be passed
-       * an object that is an instance of this resource (e.g. an image) and should
-       * return a boolean.  "true" indicates the item is in a "transition" state.
-       * @returns {ResourceType} - returning self to facilitate call-chaining.
-       */
-      function setItemInTransitionFunction(func) {
-        self.itemInTransitionFunction = func;
-        return self;
       }
 
       /**
@@ -312,13 +257,6 @@
         function mapTableInfo(x) {
           var tableInfo = x;
           tableInfo.title = x.title || label(x.id);
-          // use 'values' or 'filters' from property definition if available.
-          if (properties[x.id] && properties[x.id].values) {
-            tableInfo.values = properties[x.id].values;
-          }
-          if (properties[x.id] && properties[x.id].filters) {
-            tableInfo.filters = properties[x.id].filters;
-          }
           return tableInfo;
         }
       }
@@ -394,14 +332,6 @@
       }
 
       /**
-       * True if the load function for this resource has been registered
-       * @returns {boolean}
-       */
-      function isLoadFunctionSet() {
-        return self.load !== defaultLoadFunction;
-      }
-
-      /**
        * @ngdoc function
        * @name load
        * @description
@@ -412,7 +342,7 @@
        var loadPromise = resourceType.load('some-id');
        ```
        */
-      function defaultLoadFunction(spec) {
+      function load(spec) {
         $log.error('No load function defined for', typeCode, 'with spec', spec);
         return Promise.reject({data: {}});
       }

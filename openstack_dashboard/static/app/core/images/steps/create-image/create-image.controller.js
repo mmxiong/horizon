@@ -46,16 +46,14 @@
   ) {
     var ctrl = this;
 
-    settings.getSettings().then(getConfiguredFormatsAndModes);
+    settings.getSettings().then(getConfiguredFormats);
     ctrl.validationRules = validationRules;
     ctrl.imageFormats = imageFormats;
     ctrl.diskFormats = [];
-    ctrl.prepareUpload = prepareUpload;
 
     ctrl.image = {
       source_type: 'url',
       image_url: '',
-      data: {},
       is_copying: true,
       protected: false,
       min_disk: 0,
@@ -75,10 +73,6 @@
       { label: gettext('No'), value: false }
     ];
 
-    ctrl.imageSourceOptions = [
-      { label: gettext('URL'), value: 'url' }
-    ];
-
     ctrl.imageVisibilityOptions = [
       { label: gettext('Public'), value: 'public'},
       { label: gettext('Private'), value: 'private' }
@@ -88,7 +82,6 @@
     ctrl.ramdiskImages = [];
 
     ctrl.setFormats = setFormats;
-    ctrl.isLocalFileUpload = isLocalFileUpload;
 
     init();
 
@@ -100,30 +93,16 @@
 
     ///////////////////////////
 
-    function prepareUpload(file) {
-      ctrl.image.data = file;
-    }
-
-    function getConfiguredFormatsAndModes(response) {
+    function getConfiguredFormats(response) {
       var settingsFormats = response.OPENSTACK_IMAGE_FORMATS;
-      var uploadMode = response.HORIZON_IMAGES_UPLOAD_MODE;
       var dupe = angular.copy(imageFormats);
       angular.forEach(dupe, function stripUnknown(name, key) {
         if (settingsFormats.indexOf(key) === -1) {
           delete dupe[key];
         }
       });
-      if (uploadMode !== 'off') {
-        ctrl.imageSourceOptions.splice(0, 0, {
-          label: gettext('File'), value: 'file-' + uploadMode
-        });
-      }
-      ctrl.imageFormats = dupe;
-    }
 
-    function isLocalFileUpload() {
-      var type = ctrl.image.source_type;
-      return (type === 'file-legacy' || type === 'file-direct');
+      ctrl.imageFormats = dupe;
     }
 
     // emits new data to parent listeners

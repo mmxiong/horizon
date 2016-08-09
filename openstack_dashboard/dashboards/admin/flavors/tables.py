@@ -64,12 +64,6 @@ class UpdateFlavor(tables.LinkAction):
     classes = ("ajax-modal",)
     icon = "pencil"
 
-    def get_link_url(self, flavor):
-        step = 'update_info'
-        base_url = reverse(self.url, args=[flavor.id])
-        param = urlencode({"step": step})
-        return "?".join([base_url, param])
-
 
 class UpdateMetadata(tables.LinkAction):
     name = "update_metadata"

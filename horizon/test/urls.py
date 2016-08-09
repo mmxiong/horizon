@@ -22,7 +22,6 @@ URL patterns for testing Horizon views.
 
 from django.conf.urls import include
 from django.conf.urls import url
-from django.contrib.auth import views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns  # noqa
 from django.views.generic import TemplateView  # noqa
 
@@ -32,7 +31,8 @@ from horizon.test.jasmine import jasmine
 
 urlpatterns = [
     url(r'', include(horizon.urls)),
-    url(r"auth/login/", views.login, {'template_name': "auth/login.html"},
+    url(r"auth/login/", "django.contrib.auth.views.login",
+        {'template_name': "auth/login.html"},
         name='login'),
     url(r'auth/', include('django.contrib.auth.urls')),
     url(r'^jasmine/.*?$', jasmine.dispatcher),

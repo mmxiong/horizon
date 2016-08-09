@@ -8,10 +8,6 @@
   /* Fix for input icon alignment */
   input + .fa {
     line-height: $input-height-base;
-  }
-
-  .password-icon {
-    cursor: pointer;
-    pointer-events: auto;
+    top: 0;
   }
 }

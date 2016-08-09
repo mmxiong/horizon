@@ -13,16 +13,14 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-(function () {
+(function() {
   'use strict';
 
   angular
     .module('horizon.framework.widgets.table')
     .directive('hzDynamicTable', hzDynamicTable);
 
-  hzDynamicTable.$inject = [
-    'horizon.framework.widgets.basePath'
-  ];
+  hzDynamicTable.$inject = ['horizon.framework.widgets.basePath'];
 
   /**
    * @ngdoc directive
@@ -39,9 +37,6 @@
    *   searching. Filter will not be shown if this is not supplied (optional)
    * @param {function=} resultHandler function that is called with return value
    *   from a clicked actions perform function passed into `actions` directive (optional)
-   * @param {function=} itemInTransitionFunction function that is called with each item in
-   *   the table. If it returns true, the row is given the class "status_unknown" which by
-   *   default highlights the row with a warning color.
    *
    * @description
    * The `hzDynamicTable` directive generates all the HTML content for a table.
@@ -53,24 +48,10 @@
    * selectAll {boolean} set to true if you want to enable select all checkbox
    * expand {boolean} set to true if you want to inline details
    * trackId {string} passed into ngRepeat's track by to identify objects
-   * noItemsMessage {string} message to be displayed when the table is empty. If
-   *   not provided, the default message is used.
    * columns {Array} of objects to describe each column. Each object
    *   requires: 'id', 'title', 'priority' (responsive priority when table resized)
-   *   optional: 'sortDefault',
-   *     'filters' (to apply to the column cells),
-   *     'template' (see hz-cell directive for details),
-   *     'allowed' (a promise that must resolve in order for the column to be viewed),
-   *
-   * This directive provides an extension point for applications to decorate additional declarative
-   * column level permissions that must be fulfilled in order for the column to be viewed. For
-   * example, openstack dashboard adds the following optional declarative permissions:
-   *     'services' (OpenStack services that must be enabled in the current region),
-   *     'settings' (horizon settings that must be enabled)
-   *     'policies' (policy rules that must be allowed)
-   *
-   * This is accomplished by decorating the 'horizon.framework.conf.permissions' service.
-   * See that service for more information.
+   *   optional: 'sortDefault', 'filters' (to apply to the column cells),
+   *     'template' (see hz-cell directive for details)
    *
    * @example
    *
@@ -83,7 +64,6 @@
    *     {id: 'b', title: 'B', priority: 2},
    *     {id: 'c', title: 'C', priority: 1, sortDefault: true},
    *     {id: 'd', title: 'D', priority: 2, filters: [myFilter, 'yesno']}
-   *     {id: 'e', title: 'E', allowed: allowedPromiseFunction}
    *   ]
    * };
    * ```
@@ -111,10 +91,6 @@
     // items will be effectively "static" for the lifespan of the directive whereas
     // angular will watch directive attributes for changes. This should be revisited
     // at some point to make sure the split we've actually got here makes sense.
-
-    // TODO (tyr) In Ocata, convert to "controller as" syntax.
-    // This was not done in Mitaka to avoid breaking any hz-detail-row templates that
-    // assume table attributes are available directly on inherited scope.
     var directive = {
       restrict: 'E',
       scope: {
@@ -124,13 +100,25 @@
         batchActions: '=?',
         itemActions: '=?',
         filterFacets: '=?',
-        resultHandler: '=?',
-        itemInTransitionFunction: '=?'
+        resultHandler: '=?'
       },
-      controller: 'horizon.framework.widgets.table.HzDynamicTableController',
-      templateUrl: basePath + 'table/hz-dynamic-table.html'
+      templateUrl: basePath + 'table/hz-dynamic-table.html',
+      link: link
     };
 
     return directive;
+
+    function link(scope) {
+      scope.items = [];
+
+      // if selectAll and expand are not set in the config, default set to true
+
+      if (angular.isUndefined(scope.config.selectAll)) {
+        scope.config.selectAll = true;
+      }
+      if (angular.isUndefined(scope.config.expand)) {
+        scope.config.expand = true;
+      }
+    }
   }
 })();

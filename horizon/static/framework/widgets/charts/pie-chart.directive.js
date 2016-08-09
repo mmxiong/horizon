@@ -113,8 +113,6 @@
     return directive;
 
     function link(scope, element) {
-      var d3Elt, arc, pie;
-
       function updateChartVisibility() {
         var showChart = scope.chartData.maxLimit !== Infinity;
         scope.chartData.showChart = showChart;
@@ -144,13 +142,13 @@
       };
 
       if (showChart) {
-        d3Elt = d3.select(element[0]);
+        var d3Elt = d3.select(element[0]);
 
-        arc = d3.svg.arc()
+        var arc = d3.svg.arc()
           .outerRadius(settings.outerRadius)
           .innerRadius(settings.innerRadius);
 
-        pie = d3.layout.pie()
+        var pie = d3.layout.pie()
           .sort(null)
           .value(function (d) {
             return d.value;

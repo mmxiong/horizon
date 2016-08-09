@@ -39,13 +39,9 @@
     '$scope'
   ];
 
-  function ObjectsController(containersModel,
-                             containerRoute,
-                             batchActions,
-                             rowActions,
-                             $q,
-                             $routeParams,
-                             $scope) {
+  function ObjectsController(containersModel, containerRoute, batchActions,
+                             rowActions, $q, $routeParams, $scope)
+  {
     var ctrl = this;
 
     ctrl.rowActions = rowActions;

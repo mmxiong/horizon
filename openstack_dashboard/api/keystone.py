@@ -232,9 +232,9 @@ def domain_update(request, domain_id, name=None, description=None,
     try:
         response = manager.update(domain_id, name=name,
                                   description=description, enabled=enabled)
-    except Exception:
+    except Exception as e:
         LOG.exception("Unable to update Domain: %s" % domain_id)
-        raise
+        raise e
     return response
 
 
@@ -293,6 +293,7 @@ def is_cloud_admin(request):
 
 
 def is_domain_admin(request):
+    # TODO(btully): check this to verify that domain id is in scope vs target
     return policy.check(
         (("identity", "admin_and_matching_domain_id"),), request)
 

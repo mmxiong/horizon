@@ -29,11 +29,10 @@ from openstack_dashboard import api
 
 NEW_LINES = re.compile(r"\r|\n")
 
-KEYPAIR_NAME_REGEX = re.compile(r"^\w+(?:[- ]\w+)*$", re.UNICODE)
+KEYPAIR_NAME_REGEX = re.compile(r"^[\w\- ]+$", re.UNICODE)
 KEYPAIR_ERROR_MESSAGES = {
     'invalid': _('Key pair name may only contain letters, '
-                 'numbers, underscores, spaces, and hyphens '
-                 'and may not be white space.')}
+                 'numbers, underscores, spaces and hyphens.')}
 
 
 class CreateKeypair(forms.SelfHandlingForm):

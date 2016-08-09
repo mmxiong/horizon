@@ -86,11 +86,6 @@
         "func": "getLimits",
         "method": "get",
         "path": "/api/nova/limits/",
-        "data": {
-          "params": {
-            "reserved": undefined
-          }
-        },
         "error": "Unable to retrieve the limits."
       },
       {

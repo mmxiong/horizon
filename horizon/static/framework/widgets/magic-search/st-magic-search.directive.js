@@ -86,9 +86,7 @@
     return directive;
 
     function link(scope, element, attr, tableCtrl) {
-      scope.currentServerSearchParams = {
-        "magicSearchQuery": ""
-      };
+      scope.currentServerSearchParams = {};
 
       // Generate predicate object from dot notation string
       function setPredObj(predicates, predObj, input) {

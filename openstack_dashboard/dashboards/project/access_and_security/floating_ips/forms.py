@@ -28,7 +28,7 @@ from openstack_dashboard.usage import quotas
 
 
 class FloatingIpAllocate(forms.SelfHandlingForm):
-    pool = forms.ThemableChoiceField(label=_("Pool"))
+    pool = forms.ChoiceField(label=_("Pool"))
 
     def __init__(self, *args, **kwargs):
         super(FloatingIpAllocate, self).__init__(*args, **kwargs)

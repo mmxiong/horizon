@@ -1144,11 +1144,11 @@ def _server_get_addresses(request, server, ports, floating_ips, network_names):
     def _format_address(mac, ip, type):
         try:
             version = netaddr.IPAddress(ip).version
-        except Exception:
+        except Exception as e:
             error_message = _('Unable to parse IP address %s.') % ip
             LOG.error(error_message)
             messages.error(request, error_message)
-            raise
+            raise e
         return {u'OS-EXT-IPS-MAC:mac_addr': mac,
                 u'version': version,
                 u'addr': ip,
@@ -1178,9 +1178,9 @@ def _server_get_addresses(request, server, ports, floating_ips, network_names):
 def list_extensions(request):
     extensions_list = neutronclient(request).list_extensions()
     if 'extensions' in extensions_list:
-        return tuple(extensions_list['extensions'])
+        return extensions_list['extensions']
     else:
-        return ()
+        return {}
 
 
 @memoized
@@ -1287,7 +1287,8 @@ def get_feature_permission(request, feature, operation=None):
 
     # Check policy
     feature_policies = feature_info.get('policies')
-    if feature_policies:
+    policy_check = getattr(settings, "POLICY_CHECK_FUNCTION", None)
+    if feature_policies and policy_check:
         policy_name = feature_policies.get(operation)
         if not policy_name:
             # Translators: Only used inside Horizon code and invisible to users

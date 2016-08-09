@@ -42,7 +42,6 @@
 
     ///////////////////////
 
-    beforeEach(module('horizon.framework.util.filters'));
     beforeEach(module('horizon.framework.util.http'));
     beforeEach(module('horizon.framework.util.i18n'));
     beforeEach(module('horizon.framework.conf'));

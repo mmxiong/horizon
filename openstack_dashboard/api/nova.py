@@ -811,8 +811,7 @@ def tenant_quota_get(request, tenant_id):
 
 
 def tenant_quota_update(request, tenant_id, **kwargs):
-    if kwargs:
-        novaclient(request).quotas.update(tenant_id, **kwargs)
+    novaclient(request).quotas.update(tenant_id, **kwargs)
 
 
 def default_quota_get(request, tenant_id):
@@ -1084,8 +1083,3 @@ def can_set_mount_point():
 def requires_keypair():
     features = getattr(settings, 'OPENSTACK_HYPERVISOR_FEATURES', {})
     return features.get('requires_keypair', False)
-
-
-def can_set_quotas():
-    features = getattr(settings, 'OPENSTACK_HYPERVISOR_FEATURES', {})
-    return features.get('enable_quotas', True)

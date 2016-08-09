@@ -19,6 +19,7 @@
 
   var forEach = angular.forEach;
 
+  /* eslint-disable max-len */
   /**
    * @ngdoc factory
    * @name horizon.app.core.workflow.factory:horizon.app.core.workflow.decorator
@@ -42,6 +43,7 @@
    * @returns {Object} The decorated workflow specification object, the same
    * reference to the input spec object.
    */
+  /* eslint-ensable max-len */
   angular
     .module('horizon.app.core.workflow')
     .factory('horizon.app.core.workflow.decorator', dashboardWorkflowDecorator);

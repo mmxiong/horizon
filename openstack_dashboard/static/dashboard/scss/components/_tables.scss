@@ -57,9 +57,8 @@
 
     @media (min-width: $grid-float-breakpoint) {
       dt {
-        width: ($dl-horizontal-offset/2) - $padding-large-vertical;
+        width: (($dl-horizontal-offset/2) - 20);
       }
-
       dd {
         margin-left: $dl-horizontal-offset/2;
       }

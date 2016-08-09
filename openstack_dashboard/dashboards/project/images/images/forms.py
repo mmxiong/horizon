@@ -128,18 +128,18 @@ class CreateImageForm(forms.SelfHandlingForm):
     kernel = forms.ChoiceField(
         label=_('Kernel'),
         required=False,
-        widget=forms.ThemableSelectWidget(
+        widget=forms.SelectWidget(
             transform=lambda x: "%s (%s)" % (
                 x.name, defaultfilters.filesizeformat(x.size))))
     ramdisk = forms.ChoiceField(
         label=_('Ramdisk'),
         required=False,
-        widget=forms.ThemableSelectWidget(
+        widget=forms.SelectWidget(
             transform=lambda x: "%s (%s)" % (
                 x.name, defaultfilters.filesizeformat(x.size))))
     disk_format = forms.ChoiceField(label=_('Format'),
                                     choices=[],
-                                    widget=forms.ThemableSelectWidget(attrs={
+                                    widget=forms.Select(attrs={
                                         'class': 'switchable',
                                         'ng-model': 'ctrl.diskFormat'}))
     architecture = forms.CharField(
@@ -180,7 +180,7 @@ class CreateImageForm(forms.SelfHandlingForm):
     def __init__(self, request, *args, **kwargs):
         super(CreateImageForm, self).__init__(request, *args, **kwargs)
 
-        if (api.glance.get_image_upload_mode() == 'off' or
+        if (not settings.HORIZON_IMAGES_ALLOW_UPLOAD or
                 not policy.check((("image", "upload_image"),), request)):
             self._hide_file_source_type()
         if not policy.check((("image", "set_image_location"),), request):
@@ -271,7 +271,7 @@ class CreateImageForm(forms.SelfHandlingForm):
         meta = create_image_metadata(data)
 
         # Add image source file or URL to metadata
-        if (api.glance.get_image_upload_mode() != 'off' and
+        if (settings.HORIZON_IMAGES_ALLOW_UPLOAD and
                 policy.check((("image", "upload_image"),), request) and
                 data.get('image_file', None)):
             meta['data'] = self.files['image_file']
@@ -329,7 +329,7 @@ class UpdateImageForm(forms.SelfHandlingForm):
         required=False,
         widget=forms.TextInput(attrs={'readonly': 'readonly'}),
     )
-    disk_format = forms.ThemableChoiceField(
+    disk_format = forms.ChoiceField(
         label=_("Format"),
     )
     minimum_disk = forms.IntegerField(label=_("Minimum Disk (GB)"),

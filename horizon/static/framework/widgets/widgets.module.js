@@ -21,7 +21,6 @@
     .module('horizon.framework.widgets', [
       'horizon.framework.widgets.headers',
       'horizon.framework.widgets.details',
-      'horizon.framework.widgets.form',
       'horizon.framework.widgets.help-panel',
       'horizon.framework.widgets.wizard',
       'horizon.framework.widgets.property',

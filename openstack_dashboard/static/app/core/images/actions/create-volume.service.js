@@ -25,9 +25,8 @@
     'horizon.app.core.openstack-service-api.cinder',
     'horizon.app.core.openstack-service-api.policy',
     'horizon.app.core.openstack-service-api.serviceCatalog',
-    'horizon.app.core.images.events',
-    'horizon.app.core.images.non_bootable_image_types',
     'horizon.app.core.images.workflows.create-volume.service',
+    'horizon.app.core.images.events',
     'horizon.framework.util.actions.action-result.service',
     'horizon.framework.util.q.extensions',
     'horizon.framework.widgets.modal.wizard-modal.service',
@@ -47,9 +46,8 @@
     cinder,
     policy,
     serviceCatalog,
-    events,
-    nonBootableImageTypes,
     createVolumeWorkflowService,
+    events,
     actionResultService,
     $qExtensions,
     wizardModalService,
@@ -57,6 +55,7 @@
     volumeResourceType
   ) {
     var scope, createVolumePromise, volumeServiceEnabledPromise;
+    var NON_BOOTABLE_IMAGE_TYPES = ['aki', 'ari'];
 
     var volume = {};
 
@@ -120,7 +119,7 @@
 
     function imageBootable(image) {
       return $qExtensions.booleanAsPromise(
-        nonBootableImageTypes.indexOf(image.container_format) < 0
+        NON_BOOTABLE_IMAGE_TYPES.indexOf(image.container_format) < 0
       );
     }
 

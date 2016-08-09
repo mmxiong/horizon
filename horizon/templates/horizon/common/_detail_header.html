@@ -1,12 +1,12 @@
-<div class='page-header detail-header'>
+<div class='page-header'>
   <div class="row">
-    <div class="detail-title col-xs-12 col-sm-9">
+    <div class="col-xs-12 col-sm-9 text-left">
       <span class="h1">{{ page_title }}</span>
     </div>
 
-    <div class="detail-actions col-xs-12 col-sm-3 text-right">
+    <div class="col-xs-12 col-sm-3 text-right">
       {% if actions %}
-      <form class='detail-actions-form actions_column' action='{{ url }}' method="POST">
+      <form class='actions_column' action='{{ url }}' method="POST">
         {% csrf_token %}
         {{ actions }}
       </form>

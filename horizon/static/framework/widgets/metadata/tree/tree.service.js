@@ -82,7 +82,7 @@
           break;
         case 'array':
           var data = /^(<.*?>) (.*)$/.exec(value);
-          if (data && data.length > 2) {
+          if (data) {
             this.operator = data[1];
             this.value = data[2].split(',');
           }
@@ -440,11 +440,7 @@
       var existing = {};
       angular.forEach(this.flatTree, function (item) {
         if (item.added && item.leaf) {
-          if (item.leaf.type === 'array' && item.leaf.value.length === 0) {
-            // Do nothing, the user has removed or not selected any array values
-          } else {
-            existing[item.leaf.name] = item.getLeafValue();
-          }
+          existing[item.leaf.name] = item.getLeafValue();
         }
       });
       return existing;

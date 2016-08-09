@@ -16,7 +16,6 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from django.conf import settings
 from django.conf.urls import include
 from django.conf.urls import url
 
@@ -27,16 +26,8 @@ from openstack_dashboard.dashboards.project.images.snapshots \
 from openstack_dashboard.dashboards.project.images import views
 
 
-if settings.HORIZON_CONFIG['images_panel'] == 'angular':
-    # New angular images
-    urlpatterns = [
-        url(r'^$', views.AngularIndexView.as_view(), name='index'),
-        url(r'', include(image_urls, namespace='images')),
-        url(r'', include(snapshot_urls, namespace='snapshots')),
-    ]
-else:
-    urlpatterns = [
-        url(r'^$', views.IndexView.as_view(), name='index'),
-        url(r'', include(image_urls, namespace='images')),
-        url(r'', include(snapshot_urls, namespace='snapshots')),
-    ]
+urlpatterns = [
+    url(r'^$', views.IndexView.as_view(), name='index'),
+    url(r'', include(image_urls, namespace='images')),
+    url(r'', include(snapshot_urls, namespace='snapshots')),
+]

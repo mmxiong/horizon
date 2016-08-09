@@ -27,7 +27,6 @@ class Overview(horizon.Panel):
     name = _("Overview")
     slug = 'overview'
     policy_rules = (('identity', 'identity:list_projects'),)
-    permissions = ('openstack.services.compute',)
 
 
 dashboard.Admin.register(Overview)

@@ -16,6 +16,7 @@
 (function () {
   'use strict';
 
+  /* eslint-disable max-len */
   /**
    * @ngdoc overview
    * @name horizon.app.core.workflow
@@ -26,6 +27,7 @@
    * This module provides utility function factory `dashboardWorkflow` and
    * `dashboardWorkflowDecorator`.
    */
+  /* eslint-enable max-len */
   angular.module('horizon.app.core.workflow', []);
 
 })();

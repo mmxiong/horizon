@@ -23,6 +23,7 @@
   hzDetailRow.$inject = ['horizon.framework.widgets.basePath',
     '$http',
     '$compile',
+    '$parse',
     '$templateCache'];
 
   /**
@@ -32,7 +33,7 @@
    * The `hzDetailRow` directive is the detail drawer per each row triggered by
    * the hzExpandDetail. Use this option for customization and complete control over what
    * is rendered. If a custom template is not provided, it will use the template
-   * found at hz-detail-row.html. 'config.columns' 'table' and 'item' must be provided for the
+   * found at hz-detail-row.html. 'config.columns' and 'item' must be provided for the
    * default template to work. See example below.
    *
    * It should ideally be used within the context of the `hz-dynamic-table` directive.
@@ -71,7 +72,7 @@
    * ```
    *
    */
-  function hzDetailRow(basePath, $http, $compile, $templateCache) {
+  function hzDetailRow(basePath, $http, $compile, $parse, $templateCache) {
 
     var directive = {
       restrict: 'E',
@@ -82,19 +83,15 @@
     return directive;
 
     function link(scope, element, attrs) {
-      // Watch for changes to the template URL to allow the template to change
-      // at run-time, or to support late binding where we display part of the
-      // table before knowing the type of each row
-      scope.$watch(attrs.templateUrl, function(templateUrl) {
-        if (!templateUrl) {
-          templateUrl = basePath + 'table/hz-detail-row.html';
-        }
-        $http.get(templateUrl, { cache: $templateCache })
-          .then(function(response) {
-            var template = response.data;
-            element.append($compile(template)(scope));
-          });
-      });
+      var templateUrl = $parse(attrs.templateUrl)(scope);
+      if (angular.isUndefined(templateUrl)) {
+        templateUrl = basePath + 'table/hz-detail-row.html';
+      }
+      $http.get(templateUrl, { cache: $templateCache })
+        .then(function(response) {
+          var template = response.data;
+          element.append($compile(template)(scope));
+        });
     }
   }
 })();

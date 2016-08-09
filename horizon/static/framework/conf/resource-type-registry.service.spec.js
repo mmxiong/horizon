@@ -130,21 +130,6 @@
         {title: "im-a-title"}]);
     });
 
-    it('places property .values and .filters on table', function() {
-      var type = service.getResourceType('something');
-      var func = angular.noop;
-      type.setProperty('im-an-id', {filters: [func], values: {a: 'apple'}});
-      type.tableColumns.push({id: "im-an-id"});
-      expect(type.getTableColumns()[0].filters).toEqual([func]);
-      expect(type.getTableColumns()[0].values).toEqual({a: 'apple'});
-    });
-
-    it('getProperties returns a copy of the properties', function() {
-      var type = service.getResourceType('something');
-      type.setProperty('im-an-id', {values: {a: 'apple'}});
-      expect(type.getProperties()['im-an-id']).toEqual({values: {a: 'apple'}});
-    });
-
     it('manages the globalActions', function() {
       var typeA = service.getResourceType('a');
       var typeB = service.getResourceType('b');
@@ -193,18 +178,6 @@
         }
         type.setListFunction(list);
         expect(type.list()).toBe('this would be a promise');
-      });
-
-      it("has a default isInTransition function that returns false", function() {
-        expect(type.itemInTransitionFunction()).toBe(false);
-      });
-
-      it("allows setting an isInTransition function", function() {
-        function isInTransitionTest() {
-          return "would return a boolean";
-        }
-        type.setItemInTransitionFunction(isInTransitionTest);
-        expect(type.itemInTransitionFunction()).toBe("would return a boolean");
       });
 
       it("allows setting of a summary template URL", function() {
@@ -268,24 +241,6 @@
         };
         type.setLoadFunction(api.loadMe);
         expect(type.load()).toEqual({an: 'object'});
-      });
-
-      it('detects that a load function has not been set', function() {
-        expect(type.isLoadFunctionSet()).toEqual(false);
-      });
-
-      it('detects that a load function has been set', function() {
-        type.setLoadFunction(angular.noop);
-        expect(type.isLoadFunctionSet()).toEqual(true);
-      });
-
-      it('detects that a list function has not been set', function() {
-        expect(type.isListFunctionSet()).toEqual(false);
-      });
-
-      it('detects that a list function has been set', function() {
-        type.setListFunction(angular.noop);
-        expect(type.isListFunctionSet()).toEqual(true);
       });
     });
   });

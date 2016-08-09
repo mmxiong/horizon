@@ -79,9 +79,13 @@ HORIZON_CONFIG = {
     'js_spec_files': [],
     'external_templates': [],
     'plugins': [],
-    'images_panel': 'legacy',
     'integration_tests_support': INTEGRATION_TESTS_SUPPORT
 }
+
+# Set to True to allow users to upload images to glance via Horizon server.
+# When enabled, a file form field will appear on the create image form.
+# See documentation for deployment considerations.
+HORIZON_IMAGES_ALLOW_UPLOAD = True
 
 # The OPENSTACK_IMAGE_BACKEND settings can be used to customize features
 # in the OpenStack Dashboard related to the Image service, such as the list
@@ -430,16 +434,3 @@ HORIZON_COMPRESS_OFFLINE_CONTEXT_BASE = {
 
 if DEBUG:
     logging.basicConfig(level=logging.DEBUG)
-
-
-# Here comes the Django settings deprecation section. Being at the very end
-# of settings.py allows it to catch the settings defined in local_settings.py
-# or inside one of local_settings.d/ snippets.
-if 'HORIZON_IMAGES_ALLOW_UPLOAD' in globals():
-    message = 'The setting HORIZON_IMAGES_ALLOW_UPLOAD is deprecated in ' \
-              'Newton and will be removed in P release. Use the setting ' \
-              'HORIZON_IMAGES_UPLOAD_MODE instead.'
-    if not HORIZON_IMAGES_ALLOW_UPLOAD:
-        message += ' Keep in mind that HORIZON_IMAGES_ALLOW_UPLOAD set to ' \
-                   'False overrides the value of HORIZON_IMAGES_UPLOAD_MODE.'
-    logging.warning(message)

@@ -25,8 +25,7 @@
    */
   angular
     .module('horizon.dashboard.developer', [
-      'horizon.dashboard.developer.theme-preview',
-      'horizon.dashboard.developer.resource-browser'
+      'horizon.dashboard.developer.theme-preview'
     ])
     .config(config);
 

@@ -18,7 +18,7 @@
   'use strict';
 
   describe('hz-generic-table controller', function() {
-    var ctrl, listFunctionDeferred, actionResultDeferred, $scope;
+    var ctrl, listFunctionDeferred, $timeout, actionResultDeferred, $scope;
 
     beforeEach(module('horizon.framework.util'));
     beforeEach(module('horizon.framework.conf'));
@@ -31,12 +31,15 @@
       getTableColumns: angular.noop,
       list: angular.noop,
       globalActions: [],
-      batchActions: [],
-      itemInTransitionFunction: angular.noop
+      batchActions: []
     };
 
-    beforeEach(inject(function($rootScope, $controller, $q) {
-      $scope = $rootScope.$new();
+    $scope = {
+      $on: angular.noop
+    };
+
+    beforeEach(inject(function($controller, $q, _$timeout_) {
+      $timeout = _$timeout_;
       var registry = {
         getTypeNameBySlug: angular.noop,
         getResourceType: angular.noop
@@ -46,13 +49,12 @@
       actionResultDeferred = $q.defer();
       spyOn(resourceType, 'list').and.returnValue(listFunctionDeferred.promise);
       spyOn(registry, 'getResourceType').and.returnValue(resourceType);
+      spyOn($scope, '$on');
 
       ctrl = $controller('horizon.framework.widgets.table.ResourceTableController', {
         $scope: $scope,
         'horizon.framework.conf.resource-type-registry.service': registry},
         {resourceTypeName: 'OS::Test::Example'});
-      $scope.ctrl = ctrl;
-      $scope.$apply();
     }));
 
     it('exists', function() {
@@ -61,104 +63,20 @@
 
     it('sets itemsSrc to the response data', function() {
       listFunctionDeferred.resolve({data: {items: [1,2,3]}});
-      $scope.$apply();
+      $timeout.flush();
       expect(ctrl.itemsSrc).toEqual([1,2,3]);
     });
 
     describe('server search handler', function() {
 
-      var events;
-      beforeEach(inject(function($injector) {
-        events = $injector.get('horizon.framework.widgets.magic-search.events');
-      }));
-
-      it('passes search parameters to the list function', function() {
+      it('returns the correct value from its function', function() {
+        var func = $scope.$on.calls.argsFor(0)[1];
         var input = {
           magicSearchQuery: "name=happy&age=100&height=72"
         };
-        resourceType.list.calls.reset();
-        $scope.$broadcast(events.SERVER_SEARCH_UPDATED, input);
-        expect(resourceType.list)
+        func('', input);
+        expect(ctrl.resourceType.list)
           .toHaveBeenCalledWith({name: 'happy', age: '100', height: '72'});
-      });
-    });
-
-    describe('data watchers', function() {
-
-      var events;
-      beforeEach(inject(function($injector) {
-        events = $injector.get('horizon.framework.widgets.magic-search.events');
-      }));
-
-      it('lists resources on resourceTypeName change', function() {
-        delete ctrl.resourceType;
-        ctrl.resourceTypeName = 'Test::FooBar';
-        $scope.$apply();
-        expect(ctrl.resourceType).toEqual(resourceType);
-      });
-
-      it('does not list resources on resourceTypeName undefined', function() {
-        ctrl.resourceTypeName = 'Test::FooBar';
-        $scope.$apply();
-        ctrl.resourceType.list.calls.reset();
-        ctrl.resourceTypeName = undefined;
-        $scope.$apply();
-        expect(resourceType.list.calls.count()).toBe(0);
-      });
-
-      it('lists resources on listFunctionExtraParams change', function() {
-        ctrl.listFunctionExtraParams = {data: 'foobar'};
-        resourceType.list.calls.reset();
-        $scope.$apply();
-        expect(resourceType.list).toHaveBeenCalled();
-      });
-
-      it('does not list resources on listFunctionExtraParams undefined', function() {
-        ctrl.listFunctionExtraParams = {data: 'foobar'};
-        $scope.$apply();
-        ctrl.listFunctionExtraParams = undefined;
-        resourceType.list.calls.reset();
-        $scope.$apply();
-        expect(resourceType.list.calls.count()).toBe(0);
-      });
-
-      it('does not list resources on listFunctionExtraParams change ' +
-        'if resourceType undefined', function() {
-        delete ctrl.resourceType;
-        ctrl.listFunctionExtraParams = {data: 'foobar'};
-        resourceType.list.calls.reset();
-        $scope.$apply();
-        expect(resourceType.list.calls.count()).toBe(0);
-      });
-
-      it('passes listFunctionExtraParams to list function', function() {
-        ctrl.listFunctionExtraParams = {data: 'foobar'};
-        resourceType.list.calls.reset();
-        $scope.$apply();
-        expect(resourceType.list).toHaveBeenCalledWith({data: 'foobar'});
-      });
-
-      it('merges listfunctionExtraParams with new search query', function() {
-        ctrl.listFunctionExtraParams = {data: 'foobar'};
-        var input = {
-          magicSearchQuery: "name=happy&age=100&height=72"
-        };
-        resourceType.list.calls.reset();
-        $scope.$broadcast(events.SERVER_SEARCH_UPDATED, input);
-        expect(resourceType.list)
-          .toHaveBeenCalledWith({name: 'happy', age: '100', height: '72', data: 'foobar'});
-      });
-
-      it('merges listFunctionExtraParams with prior search query', function() {
-        var input = {
-          magicSearchQuery: "name=happy&age=100&height=72"
-        };
-        $scope.$broadcast(events.SERVER_SEARCH_UPDATED, input);
-        resourceType.list.calls.reset();
-        ctrl.listFunctionExtraParams = {data: 'foobar'};
-        $scope.$apply();
-        expect(resourceType.list)
-          .toHaveBeenCalledWith({name: 'happy', age: '100', height: '72', data: 'foobar'});
       });
     });
 
@@ -170,49 +88,51 @@
       it('handles deleted items', function() {
         actionResultDeferred.resolve({deleted: [{type: 'ignored', id: 0},
           {type: 'OS::Test::Example', id: 1}]});
-        ctrl.actionResultHandler(actionResultDeferred.promise);
-        $scope.$apply();
-        expect(ctrl.itemsSrc).toEqual([{type: 'Something', id: -1}]);
+        var promise = ctrl.actionResultHandler(actionResultDeferred.promise);
+        promise.then(function() {
+          expect(ctrl.itemsSrc).toEqual([{type: 'Something', id: -1}]);
+        });
+        $timeout.flush();
       });
 
       it('handles updated items', function() {
         actionResultDeferred.resolve({updated: [{type: 'OS::Test::Example', id: 1}]});
-        ctrl.actionResultHandler(actionResultDeferred.promise);
+        var promise = ctrl.actionResultHandler(actionResultDeferred.promise);
         resourceType.list.calls.reset();
-        $scope.$apply();
-        expect(resourceType.list).toHaveBeenCalled();
+        promise.then(function() {
+          expect(resourceType.list).toHaveBeenCalled();
+        });
+        $timeout.flush();
       });
 
       it('handles created items', function() {
         actionResultDeferred.resolve({created: [{type: 'OS::Test::Example', id: 1}]});
-        ctrl.actionResultHandler(actionResultDeferred.promise);
+        var promise = ctrl.actionResultHandler(actionResultDeferred.promise);
         resourceType.list.calls.reset();
-        $scope.$apply();
-        expect(resourceType.list).toHaveBeenCalled();
+        promise.then(function() {
+          expect(resourceType.list).toHaveBeenCalled();
+        });
+        $timeout.flush();
       });
 
       it('handles failed items', function() {
         actionResultDeferred.resolve({failed: [{type: 'OS::Test::Example', id: 1}]});
-        ctrl.actionResultHandler(actionResultDeferred.promise);
+        var promise = ctrl.actionResultHandler(actionResultDeferred.promise);
         resourceType.list.calls.reset();
-        $scope.$apply();
-        expect(resourceType.list).not.toHaveBeenCalled();
+        promise.then(function() {
+          expect(resourceType.list).not.toHaveBeenCalled();
+        });
+        $timeout.flush();
       });
 
       it('handles falsy results', function() {
         actionResultDeferred.resolve(false);
-        ctrl.actionResultHandler(actionResultDeferred.promise);
+        var promise = ctrl.actionResultHandler(actionResultDeferred.promise);
         resourceType.list.calls.reset();
-        $scope.$apply();
-        expect(resourceType.list).toHaveBeenCalled();
-      });
-    });
-
-    describe('item in transition function', function() {
-      it('it calls resource type itemInTransitionFunction', function() {
-        spyOn(resourceType, "itemInTransitionFunction");
-        ctrl.itemInTransitionFunction();
-        expect(resourceType.itemInTransitionFunction.calls.count()).toBe(1);
+        promise.then(function() {
+          expect(resourceType.list).toHaveBeenCalled();
+        });
+        $timeout.flush();
       });
     });
 

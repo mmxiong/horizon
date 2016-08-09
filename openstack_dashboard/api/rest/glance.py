@@ -14,8 +14,6 @@
 """API for the glance service.
 """
 
-from django import forms
-from django.views.decorators.csrf import csrf_exempt
 from django.views import generic
 from six.moves import zip as izip
 
@@ -117,10 +115,6 @@ class ImageProperties(generic.View):
         )
 
 
-class UploadObjectForm(forms.Form):
-    data = forms.FileField(required=False)
-
-
 @urls.register
 class Images(generic.View):
     """API for Glance images.
@@ -168,26 +162,8 @@ class Images(generic.View):
             'has_prev_data': has_prev_data,
         }
 
-    # note: not an AJAX request - the body will be raw file content mixed with
-    # metadata
-    @csrf_exempt
-    def post(self, request):
-        form = UploadObjectForm(request.POST, request.FILES)
-        if not form.is_valid():
-            raise rest_utils.AjaxError(500, 'Invalid request')
-
-        data = form.clean()
-        meta = create_image_metadata(request.POST)
-        meta['data'] = data['data']
-
-        image = api.glance.image_create(request, **meta)
-        return rest_utils.CreatedResponse(
-            '/api/glance/images/%s' % image.name,
-            image.to_dict()
-        )
-
     @rest_utils.ajax(data_required=True)
-    def put(self, request):
+    def post(self, request):
         """Create an Image.
 
         Create an Image using the parameters supplied in the POST
@@ -217,13 +193,10 @@ class Images(generic.View):
         """
         meta = create_image_metadata(request.DATA)
 
-        if request.DATA.get('image_url'):
-            if request.DATA.get('import_data'):
-                meta['copy_from'] = request.DATA.get('image_url')
-            else:
-                meta['location'] = request.DATA.get('image_url')
+        if request.DATA.get('import_data'):
+            meta['copy_from'] = request.DATA.get('image_url')
         else:
-            meta['data'] = request.DATA.get('data')
+            meta['location'] = request.DATA.get('image_url')
 
         image = api.glance.image_create(request, **meta)
         return rest_utils.CreatedResponse(
@@ -353,7 +326,7 @@ def handle_unknown_properties(data, meta):
                    'container_format', 'min_disk', 'min_ram', 'name',
                    'properties', 'kernel', 'ramdisk',
                    'tags', 'import_data', 'source',
-                   'image_url', 'source_type', 'data',
+                   'image_url', 'source_type',
                    'checksum', 'created_at', 'deleted', 'is_copying',
                    'deleted_at', 'is_public', 'virtual_size',
                    'status', 'size', 'owner', 'id', 'updated_at']

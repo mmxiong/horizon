@@ -40,10 +40,7 @@ _local = threading.local()
 
 # Get the themes from settings
 def get_themes():
-    return getattr(settings, 'AVAILABLE_THEMES',
-                   [(get_default_theme(),
-                     get_default_theme(),
-                     os.path.join(get_theme_dir(), get_default_theme()))])
+    return getattr(settings, 'AVAILABLE_THEMES', [])
 
 
 # Get the themes dir from settings

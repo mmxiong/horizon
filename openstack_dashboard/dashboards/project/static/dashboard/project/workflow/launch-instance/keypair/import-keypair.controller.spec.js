@@ -19,7 +19,7 @@
 
   describe('Launch Instance Import Key Pair Controller', function() {
 
-    var novaAPI, ctrl, $q, $rootScope;
+    var novaAPI, ctrl, toastService, $q, $rootScope;
     var data = { data: { name: 'newKeypair', public_key: '' } };
     var modalInstanceMock = {
       close: angular.noop,
@@ -35,6 +35,7 @@
       ctrl = $controller('LaunchInstanceImportKeyPairController', {
         $modalInstance: modalInstanceMock
       });
+      toastService = $injector.get('horizon.framework.widgets.toast.service');
       $q = _$q_;
       $rootScope = _$rootScope_;
     }));
@@ -53,6 +54,7 @@
       var deferredSuccess = $q.defer();
       spyOn(novaAPI, 'createKeypair').and.returnValue(deferredSuccess.promise);
       spyOn(modalInstanceMock, 'close');
+      spyOn(toastService, 'add').and.callThrough();
 
       ctrl.submit();
 
@@ -61,6 +63,9 @@
 
       expect(novaAPI.createKeypair).toHaveBeenCalled();
       expect(modalInstanceMock.close).toHaveBeenCalled();
+      expect(toastService.add).toHaveBeenCalledWith(
+        'success',
+        'Successfully imported key pair newKeypair.');
     });
 
     it('defines a cancel function', function() {

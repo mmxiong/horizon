@@ -25,7 +25,6 @@ import xstatic.pkg.angular_bootstrap
 import xstatic.pkg.angular_fileupload
 import xstatic.pkg.angular_gettext
 import xstatic.pkg.angular_lrdragndrop
-import xstatic.pkg.angular_schema_form
 import xstatic.pkg.angular_smart_table
 import xstatic.pkg.bootstrap_datepicker
 import xstatic.pkg.bootstrap_scss
@@ -41,12 +40,10 @@ import xstatic.pkg.jquery_tablesorter
 import xstatic.pkg.jquery_ui
 import xstatic.pkg.jsencrypt
 import xstatic.pkg.mdi
-import xstatic.pkg.objectpath
 import xstatic.pkg.rickshaw
 import xstatic.pkg.roboto_fontface
 import xstatic.pkg.spin
 import xstatic.pkg.termjs
-import xstatic.pkg.tv4
 
 from horizon.utils import file_discovery
 
@@ -69,9 +66,6 @@ def get_staticfiles_dirs(webroot='/'):
                                  root_url=webroot).base_dir),
         ('horizon/lib/angular',
             xstatic.main.XStatic(xstatic.pkg.angular_lrdragndrop,
-                                 root_url=webroot).base_dir),
-        ('horizon/lib/angular',
-            xstatic.main.XStatic(xstatic.pkg.angular_schema_form,
                                  root_url=webroot).base_dir),
         ('horizon/lib/angular',
             xstatic.main.XStatic(xstatic.pkg.angular_smart_table,
@@ -115,9 +109,6 @@ def get_staticfiles_dirs(webroot='/'):
         ('horizon/lib/mdi',
          xstatic.main.XStatic(xstatic.pkg.mdi,
                               root_url=webroot).base_dir),
-        ('horizon/lib/objectpath',
-            xstatic.main.XStatic(xstatic.pkg.objectpath,
-                                 root_url=webroot).base_dir),
         ('horizon/lib',
             xstatic.main.XStatic(xstatic.pkg.rickshaw,
                                  root_url=webroot).base_dir),
@@ -130,9 +121,6 @@ def get_staticfiles_dirs(webroot='/'):
         ('horizon/lib',
          xstatic.main.XStatic(xstatic.pkg.termjs,
                               root_url=webroot).base_dir),
-        ('horizon/lib/tv4',
-            xstatic.main.XStatic(xstatic.pkg.tv4,
-                                 root_url=webroot).base_dir),
     ]
 
     if xstatic.main.XStatic(xstatic.pkg.jquery_ui,

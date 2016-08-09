@@ -19,10 +19,7 @@
     .module('horizon.framework.widgets.help-panel')
     .directive('helpPanel', helpPanel);
 
-  helpPanel.$inject = [
-    'horizon.framework.widgets.basePath',
-    'horizon.framework.util.uuid.service'
-  ];
+  helpPanel.$inject = [ 'horizon.framework.widgets.basePath' ];
 
   /**
    * @ngdoc directive
@@ -41,14 +38,9 @@
    * </div>
    * ```
    */
-  function helpPanel(path, uuid) {
-    var link = function(scope) {
-      scope.uuid = uuid.generate();
-    };
-
+  function helpPanel(path) {
     var directive = {
       templateUrl: path + 'help-panel/help-panel.html',
-      link: link,
       transclude: true
     };
 

@@ -30,8 +30,7 @@
     '$log',
     'horizon.framework.widgets.transfer-table.events',
     'horizon.framework.widgets.transfer-table.helpText',
-    'horizon.framework.widgets.transfer-table.limits',
-    'horizon.framework.util.q.extensions'
+    'horizon.framework.widgets.transfer-table.limits'
   ];
 
   /**
@@ -68,8 +67,7 @@
     $log,
     events,
     helpText,
-    limits,
-    qExtensions
+    limits
   ) {
     var trModel = $parse($attrs.trModel)($scope);
     var trHelpText = $parse($attrs.helpText)($scope);
@@ -78,7 +76,6 @@
     var ctrl = this;
     ctrl.allocate = allocate;
     ctrl.deallocate = deallocate;
-    ctrl.itemActions = getItemActions();
     ctrl.toggleView = toggleView;
     ctrl.updateAllocated = updateAllocated;
     ctrl.numAllocated = numAllocated;
@@ -99,40 +96,6 @@
     init(trModel);
 
     //////////
-
-    function getItemActions() {
-      return [{
-        template: {
-          text: '',
-          actionClasses: 'fa fa-plus'
-        },
-        service: {
-          allowed: function allocationAllowed(item) {
-            var allocatable = item && !ctrl.allocatedIds[item.id];
-            return qExtensions.booleanAsPromise(allocatable);
-          },
-          perform: function performAllocation(item) {
-            allocate(item);
-            return qExtensions.booleanAsPromise(true);
-          }
-        }
-      }, {
-        template: {
-          text: '',
-          actionClasses: 'fa fa-minus'
-        },
-        service: {
-          allowed: function deallocationAllowed(item) {
-            var deallocatable = item && ctrl.allocatedIds[item.id];
-            return qExtensions.booleanAsPromise(deallocatable);
-          },
-          perform: function performDeallocation(item) {
-            deallocate(item);
-            return qExtensions.booleanAsPromise(true);
-          }
-        }
-      }];
-    }
 
     function init(model) {
 

@@ -461,12 +461,10 @@ class NeutronApiTests(test.APITestCase):
         api.neutron.router_remove_interface(
             self.request, router_id, port_id=fake_port)
 
-    @test.create_stubs({api.neutron: ('is_extension_supported',)})
     def test_is_extension_supported(self):
-        api.neutron.is_extension_supported(self.request, "quotas")\
-            .AndReturn(True)
-        api.neutron.is_extension_supported(self.request, "doesntexist") \
-            .AndReturn(False)
+        neutronclient = self.stub_neutronclient()
+        neutronclient.list_extensions().MultipleTimes() \
+            .AndReturn({'extensions': self.api_extensions.list()})
         self.mox.ReplayAll()
 
         self.assertTrue(
@@ -526,10 +524,13 @@ class NeutronApiTests(test.APITestCase):
     @override_settings(OPENSTACK_NEUTRON_NETWORK={'enable_distributed_router':
                                                   True},
                        POLICY_CHECK_FUNCTION=None)
-    @test.create_stubs({api.neutron: ('is_extension_supported',)})
     def _test_get_dvr_permission_dvr_supported(self, dvr_enabled):
-        api.neutron.is_extension_supported(self.request, 'dvr').\
-            AndReturn(dvr_enabled)
+        neutronclient = self.stub_neutronclient()
+        extensions = self.api_extensions.list()
+        if not dvr_enabled:
+            extensions = [ext for ext in extensions if ext['alias'] != 'dvr']
+        neutronclient.list_extensions() \
+            .AndReturn({'extensions': extensions})
         self.mox.ReplayAll()
         self.assertEqual(dvr_enabled,
                          api.neutron.get_feature_permission(self.request,
@@ -544,7 +545,6 @@ class NeutronApiTests(test.APITestCase):
     @override_settings(OPENSTACK_NEUTRON_NETWORK={'enable_distributed_router':
                                                   True},
                        POLICY_CHECK_FUNCTION=policy.check)
-    @test.create_stubs({api.neutron: ('is_extension_supported',)})
     def _test_get_dvr_permission_with_policy_check(self, policy_check_allowed,
                                                    operation):
         self.mox.StubOutWithMock(policy, 'check')
@@ -554,8 +554,9 @@ class NeutronApiTests(test.APITestCase):
             role = (("network", "get_router:distributed"),)
         policy.check(role, self.request).AndReturn(policy_check_allowed)
         if policy_check_allowed:
-            api.neutron.is_extension_supported(self.request, 'dvr').\
-                AndReturn(policy_check_allowed)
+            neutronclient = self.stub_neutronclient()
+            neutronclient.list_extensions() \
+                .AndReturn({'extensions': self.api_extensions.list()})
         self.mox.ReplayAll()
         self.assertEqual(policy_check_allowed,
                          api.neutron.get_feature_permission(self.request,
@@ -602,13 +603,16 @@ class NeutronApiTests(test.APITestCase):
 
     @override_settings(OPENSTACK_NEUTRON_NETWORK={'enable_ha_router': True},
                        POLICY_CHECK_FUNCTION=policy.check)
-    @test.create_stubs({api.neutron: ('is_extension_supported', )})
     def _test_get_router_ha_permission_with_policy_check(self, ha_enabled):
         self.mox.StubOutWithMock(policy, 'check')
         role = (("network", "create_router:ha"),)
         policy.check(role, self.request).AndReturn(True)
-        api.neutron.is_extension_supported(self.request, 'l3-ha')\
-            .AndReturn(ha_enabled)
+        neutronclient = self.stub_neutronclient()
+        if ha_enabled:
+            extensions = self.api_extensions.list()
+        else:
+            extensions = {}
+        neutronclient.list_extensions().AndReturn({'extensions': extensions})
         self.mox.ReplayAll()
         self.assertEqual(ha_enabled,
                          api.neutron.get_feature_permission(self.request,

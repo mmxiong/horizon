@@ -15,6 +15,7 @@
 
 import logging
 
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django import shortcuts
 from django.utils.http import urlencode
@@ -28,12 +29,13 @@ from horizon import messages
 from horizon import tables
 
 from openstack_dashboard import api
-from openstack_dashboard import policy
 from openstack_dashboard.usage import quotas
 from openstack_dashboard.utils import filters
 
 
 LOG = logging.getLogger(__name__)
+
+POLICY_CHECK = getattr(settings, "POLICY_CHECK_FUNCTION", lambda p, r: True)
 
 
 class AllocateIP(tables.LinkAction):
@@ -59,12 +61,12 @@ class AllocateIP(tables.LinkAction):
             self.classes = classes
 
         if api.base.is_service_enabled(request, "network"):
-            policy_rules = (("network", "create_floatingip"),)
+            policy = (("network", "create_floatingip"),)
         else:
-            policy_rules = (("compute", "compute_extension:floating_ips"),
-                            ("compute", "network:allocate_floating_ip"),)
+            policy = (("compute", "compute_extension:floating_ips"),
+                      ("compute", "network:allocate_floating_ip"),)
 
-        return policy.check(policy_rules, request)
+        return POLICY_CHECK(policy, request)
 
 
 class ReleaseIPs(tables.BatchAction):
@@ -92,12 +94,12 @@ class ReleaseIPs(tables.BatchAction):
 
     def allowed(self, request, fip=None):
         if api.base.is_service_enabled(request, "network"):
-            policy_rules = (("network", "delete_floatingip"),)
+            policy = (("network", "delete_floatingip"),)
         else:
-            policy_rules = (("compute", "compute_extension:floating_ips"),
-                            ("compute", "network:release_floating_ip"),)
+            policy = (("compute", "compute_extension:floating_ips"),
+                      ("compute", "network:release_floating_ip"),)
 
-        return policy.check(policy_rules, request)
+        return POLICY_CHECK(policy, request)
 
     def action(self, request, obj_id):
         api.network.tenant_floating_ip_release(request, obj_id)
@@ -112,12 +114,12 @@ class AssociateIP(tables.LinkAction):
 
     def allowed(self, request, fip):
         if api.base.is_service_enabled(request, "network"):
-            policy_rules = (("network", "update_floatingip"),)
+            policy = (("network", "update_floatingip"),)
         else:
-            policy_rules = (("compute", "compute_extension:floating_ips"),
-                            ("compute", "network:associate_floating_ip"),)
+            policy = (("compute", "compute_extension:floating_ips"),
+                      ("compute", "network:associate_floating_ip"),)
 
-        return not fip.port_id and policy.check(policy_rules, request)
+        return not fip.port_id and POLICY_CHECK(policy, request)
 
     def get_link_url(self, datum):
         base_url = reverse(self.url)
@@ -134,12 +136,12 @@ class DisassociateIP(tables.Action):
 
     def allowed(self, request, fip):
         if api.base.is_service_enabled(request, "network"):
-            policy_rules = (("network", "update_floatingip"),)
+            policy = (("network", "update_floatingip"),)
         else:
-            policy_rules = (("compute", "compute_extension:floating_ips"),
-                            ("compute", "network:disassociate_floating_ip"),)
+            policy = (("compute", "compute_extension:floating_ips"),
+                      ("compute", "network:disassociate_floating_ip"),)
 
-        return fip.port_id and policy.check(policy_rules, request)
+        return fip.port_id and POLICY_CHECK(policy, request)
 
     def single(self, table, request, obj_id):
         try:

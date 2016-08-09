@@ -46,9 +46,7 @@
     .constant('horizon.dashboard.project.workflow.launch-instance.step-policy', {
       // This policy determines if the scheduler hints extension is discoverable when listing
       // available extensions. It's possible the extension is installed but not discoverable.
-      schedulerHints: { rules: [['compute', 'os_compute_api:os-scheduler-hints:discoverable']] },
-      // Determine if the server groups extension is discoverable.
-      serverGroups: { rules: [['compute', 'os_compute_api:os-server-groups:discoverable']] }
+      schedulerHints: { rules: [['compute', 'os_compute_api:os-scheduler-hints:discoverable']] }
     })
 
     .filter('diskFormat', diskFormat);

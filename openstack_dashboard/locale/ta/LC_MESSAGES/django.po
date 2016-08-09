@@ -1,9 +1,9 @@
 # OpenStack Infra <zanata@openstack.org>, 2015. #zanata
 msgid ""
 msgstr ""
-"Project-Id-Version: horizon 10.0.0.0b3.dev175\n"
+"Project-Id-Version: horizon 10.0.0.0b2.dev324\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/openstack-i18n/\n"
-"POT-Creation-Date: 2016-08-06 08:45+0000\n"
+"POT-Creation-Date: 2016-07-12 20:13+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1025,6 +1025,17 @@ msgstr "குழுவை உருவாக்கு"
 
 msgid "Create Host Aggregate"
 msgstr "புரவலர் திரளை உருவாக்கு"
+
+msgid ""
+"Create IPSec Site Connection for current project.\n"
+"\n"
+"Assign a name and description for the IPSec Site Connection. All fields in "
+"this tab are required."
+msgstr ""
+"தற்போதைய பிராஜக்டிற்கு IPSec தள இணைப்பை உருவாக்கவும்.\n"
+"\n"
+"IPSec தள இணைப்ிபற்கு ஒரு பெயர் மற்றும் விளக்கத்தை ஒதுக்கவும். இந்த தத்தலில் உள்ள அனைத்து "
+"புலங்களும் தேவை."
 
 msgid "Create Image"
 msgstr "படிமத்தை உருவாக்கு"
@@ -2843,6 +2854,13 @@ msgstr ""
 
 msgid "Key Size (bits)"
 msgstr "முக்கிய அளவு (பைட்டுகள்)"
+
+msgid ""
+"Key pair name may only contain letters, numbers, underscores, spaces and "
+"hyphens."
+msgstr ""
+"விசை ஜோடி பெயர் எழுத்துகள், எண்கள், அடிக்கோடுகள், இடைவெளிகள் மற்றும் இணைப்புக்குறிகளை "
+"கொண்டிருக்கலாம்."
 
 msgid "Key pair to use for authentication."
 msgstr "அங்கீகாரத்திற்கு பயன்படுத்த வேண்டிய விசை ஜோடி"

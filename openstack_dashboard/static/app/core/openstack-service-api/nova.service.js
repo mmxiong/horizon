@@ -46,7 +46,6 @@
       createServer: createServer,
       getServer: getServer,
       getServers: getServers,
-      getServerGroups: getServerGroups,
       getExtensions: getExtensions,
       getFlavors: getFlavors,
       getFlavor: getFlavor,
@@ -181,9 +180,8 @@
      * }
      * @returns {Object} The result of the API call
      */
-    function getLimits(reserved) {
-      var params = { params: {reserved: reserved }};
-      return apiService.get('/api/nova/limits/', params)
+    function getLimits() {
+      return apiService.get('/api/nova/limits/')
         .error(function () {
           toastService.add('error', gettext('Unable to retrieve the limits.'));
         });
@@ -245,22 +243,6 @@
       return apiService.get('/api/nova/servers/')
         .error(function () {
           toastService.add('error', gettext('Unable to retrieve instances.'));
-        });
-    }
-
-    /**
-     * @name getServerGroups
-     * @description
-     * Get a list of server groups.
-     *
-     * The listing result is an object with property "items". Each item is
-     * a server group.
-     * @returns {Object} The result of the API call
-     */
-    function getServerGroups() {
-      return apiService.get('/api/nova/servergroups/')
-        .error(function () {
-          toastService.add('error', gettext('Unable to retrieve server groups.'));
         });
     }
 
@@ -327,15 +309,15 @@
           // in Angular $parse() statements. Since these values are used as keys
           // to lookup data (and may end up in a $parse()) provide "user-friendly"
           // attributes
-          if (data && data.items) {
+          if ( data && data.items ) {
             data.items.map(function(item) {
-              if (item.hasOwnProperty('OS-FLV-EXT-DATA:ephemeral')) {
+              if ( item.hasOwnProperty('OS-FLV-EXT-DATA:ephemeral')) {
                 item.ephemeral = item['OS-FLV-EXT-DATA:ephemeral'];
               }
-              if (item.hasOwnProperty('OS-FLV-DISABLED:disabled')) {
+              if ( item.hasOwnProperty('OS-FLV-DISABLED:disabled')) {
                 item.disabled = item['OS-FLV-DISABLED:disabled'];
               }
-              if (item.hasOwnProperty('os-flavor-access:is_public')) {
+              if ( item.hasOwnProperty('os-flavor-access:is_public')) {
                 item.is_public = item['os-flavor-access:is_public'];
               }
             });

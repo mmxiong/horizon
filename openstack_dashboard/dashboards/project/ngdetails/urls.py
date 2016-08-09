@@ -12,11 +12,13 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+from django.conf.urls import patterns
 from django.conf.urls import url
 
 from openstack_dashboard.dashboards.project.ngdetails import views
 
 
-urlpatterns = [
+urlpatterns = patterns(
+    'openstack_dashboard.dashboards.project.ngdetails.views',
     url('', views.IndexView.as_view(), name='index'),
-]
+)

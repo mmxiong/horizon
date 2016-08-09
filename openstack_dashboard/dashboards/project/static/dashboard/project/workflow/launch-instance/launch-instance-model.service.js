@@ -138,7 +138,6 @@
       novaLimits: {},
       profiles: [],
       securityGroups: [],
-      serverGroups: [],
       volumeBootable: false,
       volumes: [],
       volumeSnapshots: [],
@@ -173,10 +172,8 @@
         networks: [],
         ports: [],
         profile: {},
-        scheduler_hints: {},
         // REQUIRED Server Key. May be empty.
         security_groups: [],
-        server_groups: [],
         // REQUIRED for JS logic (image | snapshot | volume | volume_snapshot)
         source_type: null,
         source: [],
@@ -223,7 +220,7 @@
           novaAPI.getAvailabilityZones().then(onGetAvailabilityZones, noop),
           novaAPI.getFlavors(true, true).then(onGetFlavors, noop),
           novaAPI.getKeypairs().then(onGetKeypairs, noop),
-          novaAPI.getLimits(true).then(onGetNovaLimits, noop),
+          novaAPI.getLimits().then(onGetNovaLimits, noop),
           securityGroup.query().then(onGetSecurityGroups, noop),
           serviceCatalog.ifTypeEnabled('network').then(getNetworks, noop),
           serviceCatalog.ifTypeEnabled('volume').then(getVolumes, noop),
@@ -242,7 +239,6 @@
       // This provides supplemental data non-critical to launching
       // an instance.  Therefore we load it only if the critical data
       // all loads successfully.
-      getServerGroups();
       getMetadataDefinitions();
     }
 
@@ -280,7 +276,6 @@
       setFinalSpecPorts(finalSpec);
       setFinalSpecKeyPairs(finalSpec);
       setFinalSpecSecurityGroups(finalSpec);
-      setFinalSpecServerGroup(finalSpec);
       setFinalSpecSchedulerHints(finalSpec);
       setFinalSpecMetadata(finalSpec);
 
@@ -331,7 +326,7 @@
     }
 
     function setFinalSpecFlavor(finalSpec) {
-      if (finalSpec.flavor) {
+      if ( finalSpec.flavor ) {
         finalSpec.flavor_id = finalSpec.flavor.id;
       } else {
         delete finalSpec.flavor_id;
@@ -346,7 +341,7 @@
       angular.extend(
         model.keypairs,
         data.data.items.map(function (e) {
-          e.keypair.id = 'li_keypair:' + e.keypair.name;
+          e.keypair.id = e.keypair.name;
           return e.keypair;
         }));
       if (data.data.items.length === 1) {
@@ -392,26 +387,6 @@
         }
       });
       finalSpec.security_groups = securityGroupIds;
-    }
-
-    // Server Groups
-
-    function getServerGroups() {
-      if (policy.check(stepPolicy.serverGroups)) {
-        return novaAPI.getServerGroups().then(onGetServerGroups, noop);
-      }
-    }
-
-    function onGetServerGroups(data) {
-      model.serverGroups.length = 0;
-      push.apply(model.serverGroups, data.data.items);
-    }
-
-    function setFinalSpecServerGroup(finalSpec) {
-      if (finalSpec.server_groups.length > 0) {
-        finalSpec.scheduler_hints.group = finalSpec.server_groups[0].id;
-      }
-      delete finalSpec.server_groups;
     }
 
     // Networks
@@ -649,8 +624,9 @@
         var hints = model.hintsTree.getExisting();
         if (!angular.equals({}, hints)) {
           angular.forEach(hints, function(value, key) {
-            finalSpec.scheduler_hints[key] = value + '';
+            hints[key] = value + '';
           });
+          finalSpec.scheduler_hints = hints;
         }
       }
     }

@@ -36,59 +36,37 @@
     .constant('horizon.app.core.images.validationRules', validationRules())
     .constant('horizon.app.core.images.imageFormats', imageFormats())
     .constant('horizon.app.core.images.resourceType', 'OS::Glance::Image')
-    .constant('horizon.app.core.images.statuses', {
-      'active': gettext('Active'),
-      'saving': gettext('Saving'),
-      'queued': gettext('Queued'),
-      'pending_delete': gettext('Pending Delete'),
-      'killed': gettext('Killed'),
-      'deleted': gettext('Deleted')
-    })
-    .constant('horizon.app.core.images.transitional-statuses', [
-      "saving",
-      "queued",
-      "pending_delete"
-    ])
     .run(run)
     .config(config);
 
   run.$inject = [
     'horizon.framework.conf.resource-type-registry.service',
+    'horizon.app.core.openstack-service-api.glance',
     'horizon.app.core.images.basePath',
-    'horizon.app.core.images.service',
-    'horizon.app.core.images.statuses',
     'horizon.app.core.images.resourceType'
   ];
 
-  function run(registry, basePath, imagesService, statuses, imageResourceType) {
+  function run(registry, glance, basePath, imageResourceType) {
     registry.getResourceType(imageResourceType)
       .setNames(gettext('Image'), gettext('Images'))
       .setSummaryTemplateUrl(basePath + 'details/drawer.html')
-      .setItemInTransitionFunction(imagesService.isInTransition)
       .setProperty('checksum', {
         label: gettext('Checksum')
       })
       .setProperty('container_format', {
-        label: gettext('Container Format'),
-        filters: ['uppercase']
+        label: gettext('Container Format')
       })
       .setProperty('created_at', {
         label: gettext('Created At')
       })
       .setProperty('disk_format', {
-        label: gettext('Disk Format'),
-        filters: ['noValue', 'uppercase']
+        label: gettext('Disk Format')
       })
       .setProperty('id', {
         label: gettext('ID')
       })
-      .setProperty('is_public', {
-        label: gettext('Is Public'),
-        filters: ['yesno']
-      })
       .setProperty('type', {
-        label: gettext('Type'),
-        filters: [imagesService.imageType]
+        label: gettext('Type')
       })
       .setProperty('members', {
         label: gettext('Members')
@@ -106,16 +84,13 @@
         label: gettext('Owner')
       })
       .setProperty('protected', {
-        label: gettext('Protected'),
-        filters: ['yesno']
+        label: gettext('Protected')
       })
       .setProperty('size', {
-        label: gettext('Size'),
-        filters: ['bytes']
+        label: gettext('Size')
       })
       .setProperty('status', {
-        label: gettext('Status'),
-        values: statuses
+        label: gettext('Status')
       })
       .setProperty('tags', {
         label: gettext('Tags')
@@ -141,34 +116,38 @@
       .setProperty('ramdisk_id', {
         label: gettext('Ramdisk ID')
       })
-      .setListFunction(imagesService.getImagesPromise)
+      .setListFunction(listFunction)
       .tableColumns
       .append({
         id: 'name',
         priority: 1,
         sortDefault: true,
-        urlFunction: imagesService.getDetailsPath
+        urlFunction: urlFunction
       })
       .append({
         id: 'type',
-        priority: 1
+        priority: 1,
+        filters: ['imageType']
       })
       .append({
         id: 'status',
         priority: 1,
-        itemInTransitionFunction: imagesService.isInTransition
+        filters: ['imageStatus']
       })
       .append({
         id: 'protected',
-        priority: 1
+        priority: 1,
+        filters: ['yesno']
       })
       .append({
         id: 'disk_format',
-        priority: 2
+        priority: 2,
+        filters: ['noValue', 'uppercase']
       })
       .append({
         id: 'size',
-        priority: 2
+        priority: 2,
+        filters: ['bytes']
       });
 
     registry.getResourceType(imageResourceType).filterFacets
@@ -235,6 +214,23 @@
         isServer: true,
         singleton: true
       });
+
+    function listFunction(params) {
+      return glance.getImages(params).then(modifyResponse);
+
+      function modifyResponse(response) {
+        return {data: {items: response.data.items.map(addTrackBy)}};
+
+        function addTrackBy(image) {
+          image.trackBy = image.id + image.updated_at;
+          return image;
+        }
+      }
+    }
+
+    function urlFunction(item) {
+      return 'project/ngdetails/OS::Glance::Image/' + item.id;
+    }
   }
 
   /**
@@ -302,25 +298,9 @@
     var path = $windowProvider.$get().STATIC_URL + 'app/core/images/';
     $provide.constant('horizon.app.core.images.basePath', path);
 
-    $routeProvider.when('/project/images/:id/', {
-      redirectTo: goToAngularDetails
-    });
-
-    $routeProvider.when('/admin/images/:id/detail/', {
-      redirectTo: goToAngularDetails
-    });
-
-    $routeProvider.when('/project/images/', {
+    $routeProvider.when('/project/ngimages/', {
       templateUrl: path + 'panel.html'
     });
-
-    $routeProvider.when('/admin/images/', {
-      templateUrl: path + 'panel.html'
-    });
-
-    function goToAngularDetails(params) {
-      return 'project/ngdetails/OS::Glance::Image/' + params.id;
-    }
   }
 
 })();

@@ -27,8 +27,6 @@ Horizon Plugin Registry
 +-----------------------+-----------------------------------------------------+--------------------------------------------+
 |Freezer Web UI         |https://github.com/openstack/freezer-web-ui          |https://launchpad.net/freezer               |
 +-----------------------+-----------------------------------------------------+--------------------------------------------+
-|Ironic UI              |https://github.com/openstack/ironic-ui               |https://launchpad.net/ironic                |
-+-----------------------+-----------------------------------------------------+--------------------------------------------+
 |Magnum UI              |http://github.com/openstack/magnum-ui                |https://launchpad.net/magnum-ui             |
 +-----------------------+-----------------------------------------------------+--------------------------------------------+
 |Manila UI              |http://github.com/openstack/manila-ui                |https://launchpad.net/manila-ui             |
@@ -43,8 +41,6 @@ Horizon Plugin Registry
 +-----------------------+-----------------------------------------------------+--------------------------------------------+
 |Sahara Dashboard       |https://github.com/openstack/sahara-dashboard        |https://launchpad.net/sahara                |
 +-----------------------+-----------------------------------------------------+--------------------------------------------+
-|Searchlight UI         |https://github.com/openstack/searchlight-ui          |https://launchpad.net/searchlight-ui        |
-+-----------------------+-----------------------------------------------------+--------------------------------------------+
 |Senlin Dashboard       |https://github.com/openstack/senlin-dashboard        |http://launchpad.net/senlin-dashboard       |
 +-----------------------+-----------------------------------------------------+--------------------------------------------+
 |Solum Dashboard        |https://github.com/openstack/solum-dashboard         |https://launchpad.net/solum                 |
@@ -55,9 +51,5 @@ Horizon Plugin Registry
 +-----------------------+-----------------------------------------------------+--------------------------------------------+
 |Trove Dashboard        |https://github.com/openstack/trove-dashboard         |https://launchpad.net/trove                 |
 +-----------------------+-----------------------------------------------------+--------------------------------------------+
-|Vitrage Dashboard      |http://github.com/openstack/vitrage-dashboard        |https://launchpad.net/vitrage               |
-+-----------------------+-----------------------------------------------------+--------------------------------------------+
-|Watcher Dashboard      |http://github.com/openstack/watcher-dashboard        |https://launchpad.net/watcher               |
-+-----------------------+-----------------------------------------------------+--------------------------------------------+
-|Zaqar UI               |http://github.com/openstack/zaqar-ui                 |https://launchpad.net/zaqar                 |
+|Tuskar UI              |http://github.com/openstack/tuskar-ui                |https://launchpad.net/tuskar-ui             |
 +-----------------------+-----------------------------------------------------+--------------------------------------------+
