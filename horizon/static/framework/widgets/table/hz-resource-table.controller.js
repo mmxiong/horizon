@@ -31,38 +31,91 @@
 
   function controller($q, $scope, events, searchService, actionResultService, registry) {
     var ctrl = this;
+    var lastSearchQuery = {};
 
     // 'Public' Controller members
-
-    ctrl.resourceType = registry.getResourceType(ctrl.resourceTypeName);
+    ctrl.actionResultHandler = actionResultHandler;
+    ctrl.searchFacets = [];
+    ctrl.config = {};
+    ctrl.batchActions = [];
     ctrl.items = [];
     ctrl.itemsSrc = [];
-    ctrl.searchFacets = ctrl.resourceType.filterFacets;
-    ctrl.config = {
-      detailsTemplateUrl: ctrl.resourceType.summaryTemplateUrl,
-      selectAll: true,
-      expand: true,
-      trackId: ctrl.trackBy || 'id',
-      columns: ctrl.resourceType.getTableColumns()
-    };
-    ctrl.batchActions = ctrl.resourceType.globalActions
-      .concat(ctrl.resourceType.batchActions);
+    ctrl.itemInTransitionFunction = itemInTransitionFunction;
 
-    ctrl.actionResultHandler = actionResultHandler;
-
-    // Controller Initialization/Loading
-
-    ctrl.resourceType.list().then(onLoad);
-    ctrl.resourceType.initActions($scope);
+    // Watch for changes to search bar
     $scope.$on(events.SERVER_SEARCH_UPDATED, handleServerSearch);
+
+    // Watch for changes to resourceTypeName
+    $scope.$watch(
+      "ctrl.resourceTypeName",
+      onResourceTypeNameChange
+    );
+
+    // Watch for changes to listFunctionExtraParams
+    $scope.$watch(
+      "ctrl.listFunctionExtraParams",
+      onListFunctionExtraParamsChange
+    );
 
     // Local functions
 
+    /**
+     * Handle changes to resource type name
+     *
+     * @param newValue {string}
+     * new resource type name
+     */
+    function onResourceTypeNameChange (newValue) {
+      if (angular.isDefined(newValue)) {
+        ctrl.resourceType = registry.getResourceType(newValue);
+        ctrl.resourceType.initActions($scope);
+        ctrl.searchFacets = ctrl.resourceType.filterFacets;
+        ctrl.config = {
+          detailsTemplateUrl: ctrl.resourceType.summaryTemplateUrl,
+          selectAll: true,
+          expand: ctrl.resourceType.summaryTemplateUrl,
+          trackId: ctrl.trackBy || 'id',
+          columns: ctrl.resourceType.getTableColumns()
+        };
+        ctrl.batchActions = ctrl.resourceType.globalActions
+          .concat(ctrl.resourceType.batchActions);
+        listResources();
+      }
+    }
+
+    /**
+     * Handle changes to list function extra params
+     *
+     * @param newValue {object}
+     * new list function extra params
+     */
+    function onListFunctionExtraParamsChange (newValue) {
+      if (angular.isDefined(newValue)) {
+        listResources();
+      }
+    }
+
+    /**
+     * If a resource type has been set, list all resources for this resource type.
+     * In the call to the list function, include the current search terms (if any)
+     * and any extra list function params supplied by the parent (if any).
+     */
+    function listResources() {
+      if (ctrl.resourceType) {
+        ctrl.resourceType
+          .list(angular.extend({}, lastSearchQuery, ctrl.listFunctionExtraParams))
+          .then(onLoad);
+      }
+    }
+
     function handleServerSearch(evt, magicSearchQueryObj) {
-      var params = searchService
+      // Save the current search. We will use this if an action requires we re-list
+      // resources, but still respect the current search terms.
+      lastSearchQuery = searchService
         .getSearchTermsFromQueryString(magicSearchQueryObj.magicSearchQuery)
         .reduce(queryToObject, {});
-      ctrl.resourceType.list(params).then(onLoad);
+
+      listResources();
 
       function queryToObject(orig, curr) {
         var fields = searchService.getSearchTermObject(curr);
@@ -92,7 +145,7 @@
       // the items page (like create "volume" from image).
       var deletedIds, updatedIds, createdIds, failedIds;
 
-      if ( result ) {
+      if (result) {
         // Reduce the results to just item ids ignoring other types the action
         // may have produced
         deletedIds = actionResultService.getIdsOfType(result.deleted, ctrl.resourceType.type);
@@ -106,11 +159,11 @@
         }
 
         // Handle updated and created items
-        if ( updatedIds.length || createdIds.length ) {
+        if (updatedIds.length || createdIds.length) {
           // Ideally, get each created item individually, but
           // this is simple and robust for the common use case.
           // TODO: If we want more detailed updates, we could do so here.
-          ctrl.resourceType.list().then(onLoad);
+          listResources();
         }
 
         // Handle failed items
@@ -122,7 +175,7 @@
       } else {
         // promise resolved, but no result returned. Because the action didn't
         // tell us what happened...reload the displayed items just in case.
-        ctrl.resourceType.list().then(onLoad);
+        listResources();
       }
     }
 
@@ -134,6 +187,10 @@
           return deletedItem === elem[key];
         }).length === 0;
       }
+    }
+
+    function itemInTransitionFunction(item) {
+      return ctrl.resourceType.itemInTransitionFunction(item);
     }
   }
 
